@@ -1,0 +1,1029 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Catalog xmlns="http://langdale.com.au/2005/Message#"
+         xmlns:m="http://iec.ch/TC57/2007/profile#"
+         hideInDiagrams="false"
+         ontologyURI="http://iec.ch/TC57/CIM101"
+         baseURI="http://iec.ch/TC57/2007/profile#"
+         name="Profile">
+   <Package name="Core"
+            ea_guid="EAPK_6A503B72_6E15_4cd1_B92D_DDF6D14DBE29"
+            basePackage="http://iec.ch/TC57/CIM101#Package_Core">
+      <Comment>Contains the core PowerSystemResource and ConductingEquipment entities shared by all applications plus common collections of those entities. Not all applications require all the Core entities.  This package does not depend on any other package except the Domain package, but most of the other packages have associations and generalizations that depend on it.</Comment>
+      <ParentPackage name="IEC61970"
+                     basePackage="http://iec.ch/TC57/CIM101#Package_IEC61970"/>
+   </Package>
+   <Package name="IEC61970"
+            ea_guid="EAPK_21D32832_FF64_4213_B81C_55ACE35EEBFF"
+            basePackage="http://iec.ch/TC57/CIM101#Package_IEC61970">
+      <Comment>Top package for IEC 61970.</Comment>
+      <ParentPackage name="TC57CIM" basePackage="http://iec.ch/TC57/CIM101#Package_TC57CIM"/>
+   </Package>
+   <Package name="IES_Projects"
+            ea_guid="EAPK_E247A296_8489_40cb_BCAA_5C6C1053AE29"
+            basePackage="http://iec.ch/TC57/CIM101#Package_IES_Projects">
+      <ParentPackage name="TC57CIM" basePackage="http://iec.ch/TC57/CIM101#Package_TC57CIM"/>
+   </Package>
+   <Package name="TC57CIM"
+            ea_guid="EAPK_39AA7E64_A03A_4934_AF09_E74943F7E6C0"
+            basePackage="http://iec.ch/TC57/CIM101#Package_TC57CIM">
+      <Comment>Top package for IEC TC57 CIM.</Comment>
+   </Package>
+   <Package name="Wires"
+            ea_guid="EAPK_6C99E9CA_2035_4035_B77F_9217E17D86F4"
+            basePackage="http://iec.ch/TC57/CIM101#Package_Wires">
+      <Comment>An extension to the Core and Topology package that models information on the electrical characteristics of Transmission and Distribution networks. This package is used by network applications such as State Estimation, Load Flow and Optimal Power Flow.</Comment>
+      <ParentPackage name="IEC61970"
+                     basePackage="http://iec.ch/TC57/CIM101#Package_IEC61970"/>
+   </Package>
+   <ComplexType name="ConductingEquipment"
+                hideInDiagrams="false"
+                ea_guid="EAID_118E5F6D_1E38_45db_9DC7_6982E49F9DF4"
+                baseClass="http://iec.ch/TC57/CIM101#ConductingEquipment"
+                package="Core"
+                packageURI="http://iec.ch/TC57/CIM101#Package_Core"
+                minOccurs="0"
+                maxOccurs="unbounded">
+      <Comment>The parts of the power system that are designed to carry current or that are conductively connected through terminals.</Comment>
+      <SuperType name="Equipment" baseClass="http://iec.ch/TC57/CIM101#Equipment"/>
+      <Reference hideInDiagrams="false"
+                 baseClass="http://iec.ch/TC57/CIM101#Terminal"
+                 type="Terminal"
+                 name="Terminals"
+                 ea_guid="EAID_F3811EC7_5874_410e_BEDA_C23A6F0267B8-A"
+                 baseProperty="http://iec.ch/TC57/CIM101#ConductingEquipment.Terminals"
+                 basePropertyClass="http://iec.ch/TC57/CIM101#ConductingEquipment"
+                 minOccurs="0"
+                 maxOccurs="unbounded"
+                 inverseBasePropertyClass="http://iec.ch/TC57/CIM101#ConductingEquipment"
+                 inverseBaseProperty="http://iec.ch/TC57/CIM101#Terminal.ConductingEquipment">
+         <Comment>Conducting equipment have terminals that may be connected to other conducting equipment terminals via connectivity nodes or topological nodes.</Comment>
+         <Stereotype label="ByReference">http://langdale.com.au/2005/UML#byreference</Stereotype>
+      </Reference>
+      <InverseReference hideInDiagrams="false"
+                        baseClass="http://iec.ch/TC57/CIM101#ConductingEquipment"
+                        ea_guid="EAID_0BD6F461_EDFB_404b_96F9_2E120A6D6462-B"
+                        type="ConductingEquipment"
+                        name="ConductingEquipment"
+                        baseProperty="http://iec.ch/TC57/CIM101#Terminal.ConductingEquipment"
+                        basePropertyClass="http://iec.ch/TC57/CIM101#Terminal"
+                        minOccurs="0"
+                        maxOccurs="1"
+                        inverseBasePropertyClass="http://iec.ch/TC57/CIM101#Terminal"
+                        inverseBaseProperty="http://iec.ch/TC57/CIM101#ConductingEquipment.Terminals">
+         <Comment>The conducting equipment of the terminal.  Conducting equipment have  terminals that may be connected to other conducting equipment terminals via connectivity nodes or topological nodes.</Comment>
+      </InverseReference>
+   </ComplexType>
+   <ComplexType name="Equipment"
+                hideInDiagrams="false"
+                ea_guid="EAID_19BA0153_856A_4a51_BF3F_44901C013071"
+                baseClass="http://iec.ch/TC57/CIM101#Equipment"
+                package="IES_Projects"
+                packageURI="http://iec.ch/TC57/CIM101#Package_IES_Projects"
+                minOccurs="0"
+                maxOccurs="unbounded">
+      <Comment>The parts of a power system that are physical devices, electronic or mechanical.</Comment>
+      <SuperType name="PowerSystemResource"
+                 baseClass="http://iec.ch/TC57/CIM101#PowerSystemResource"/>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#boolean"
+              xstype="boolean"
+              name="aggregate"
+              ea_guid="EAID_E5AC0A9A_7002_479d_B1A9_25BFB0B7D080"
+              baseProperty="http://iec.ch/TC57/CIM101#Equipment.aggregate"
+              basePropertyClass="http://iec.ch/TC57/CIM101#Equipment"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>The single instance of equipment represents multiple pieces of equipment that have been modeled together as an aggregate.  Examples would be power transformers or sychronous machines operating in parallel modeled as a single aggregate power transformer or aggregate synchronous machine.  This is not to be used to indicate equipment that is part of a group of interdependent equipment produced by a network production program.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#boolean"
+              xstype="boolean"
+              name="normallyInService"
+              ea_guid="EAID_5D1FDC18_6407_4409_96B6_2DF068341EB1"
+              baseProperty="http://iec.ch/TC57/CIM101#Equipment.normallyInService"
+              basePropertyClass="http://iec.ch/TC57/CIM101#Equipment"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>If true, the equipment is normally in service.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+   </ComplexType>
+   <ComplexType name="IdentifiedObject"
+                hideInDiagrams="false"
+                ea_guid="EAID_1915EA21_4EE6_4e46_BC69_D19E33936BCC"
+                baseClass="http://iec.ch/TC57/CIM101#IdentifiedObject"
+                package="IES_Projects"
+                packageURI="http://iec.ch/TC57/CIM101#Package_IES_Projects"
+                minOccurs="0"
+                maxOccurs="unbounded">
+      <Comment>This is a root class to provide common identification for all classes needing identification and naming attributes.</Comment>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#string"
+              xstype="string"
+              name="mRID"
+              ea_guid="EAID_F60DA247_13EC_4e20_84E0_ECB584F17CF7"
+              baseProperty="http://iec.ch/TC57/CIM101#IdentifiedObject.mRID"
+              basePropertyClass="http://iec.ch/TC57/CIM101#IdentifiedObject"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Master resource identifier issued by a model authority. The mRID is globally unique within an exchange context.</Comment>
+         <Comment>Global uniqeness is easily achived by using a UUID for the mRID. It is strongly recommended to do this.</Comment>
+         <Comment>For CIMXML data files in RDF syntax, the mRID is mapped to rdf:ID or rdf:about attributes that identify CIM object elements.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#string"
+              xstype="string"
+              name="aliasName"
+              ea_guid="EAID_365F5EB0_4801_4390_BB03_CCEA2E341774"
+              baseProperty="http://iec.ch/TC57/CIM101#IdentifiedObject.aliasName"
+              basePropertyClass="http://iec.ch/TC57/CIM101#IdentifiedObject"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>The aliasName is free text human readable name of the object alternative to IdentifiedObject.name. It may be non unique and may not correlate to a naming hierarchy.</Comment>
+         <Comment>The attribute aliasName is retained because of backwards compatibility between CIM relases. It is however recommended to replace aliasName with the Name class as aliasName is planned for retirement at a future time.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#string"
+              xstype="string"
+              name="name"
+              ea_guid="EAID_42A09ABD_C13B_4102_9750_BFDDFD0BABAF"
+              baseProperty="http://iec.ch/TC57/CIM101#IdentifiedObject.name"
+              basePropertyClass="http://iec.ch/TC57/CIM101#IdentifiedObject"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>The name is any free human readable and possibly non unique text naming the object.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+   </ComplexType>
+   <ComplexType name="PowerSystemResource"
+                hideInDiagrams="false"
+                ea_guid="EAID_B2713E01_31F8_4148_B4A9_D24959F2908E"
+                baseClass="http://iec.ch/TC57/CIM101#PowerSystemResource"
+                package="IES_Projects"
+                packageURI="http://iec.ch/TC57/CIM101#Package_IES_Projects"
+                minOccurs="0"
+                maxOccurs="unbounded">
+      <Comment>A power system resource can be an item of equipment such as a switch, an equipment container containing many individual items of equipment such as a substation, or an organisational entity such as sub-control area. Power system resources can have measurements associated.</Comment>
+      <SuperType name="IdentifiedObject"
+                 baseClass="http://iec.ch/TC57/CIM101#IdentifiedObject"/>
+   </ComplexType>
+   <Root name="PowerTransformer"
+         hideInDiagrams="false"
+         ea_guid="EAID_BD7286A7_1369_4922_B5F3_A7A65E55D1C1"
+         baseClass="http://iec.ch/TC57/CIM101#PowerTransformer"
+         package="IES_Projects"
+         packageURI="http://iec.ch/TC57/CIM101#Package_IES_Projects"
+         minOccurs="0"
+         maxOccurs="unbounded">
+      <Comment>An electrical device consisting of  two or more coupled windings, with or without a magnetic core, for introducing mutual coupling between electric circuits. Transformers can be used to control voltage and phase shift (active power flow).</Comment>
+      <Comment>A power transformer may be composed of separate transformer tanks that need not be identical.</Comment>
+      <Comment>A power transformer can be modelled with or without tanks and is intended for use in both balanced and unbalanced representations.   A power transformer typically has two terminals, but may have one (grounding), three or more  terminals.</Comment>
+      <Stereotype label="Concrete">http://langdale.com.au/2005/UML#concrete</Stereotype>
+      <SuperType name="ConductingEquipment"
+                 baseClass="http://iec.ch/TC57/CIM101#ConductingEquipment"/>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#string"
+              xstype="string"
+              name="vectorGroup"
+              ea_guid="EAID_9A46C9B8_E0A6_46b5_85A0_90BADF630818"
+              baseProperty="http://iec.ch/TC57/CIM101#PowerTransformer.vectorGroup"
+              basePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformer"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Vector group of the transformer for protective relaying, e.g., Dyn1. For unbalanced transformers, this may not be simply determined from the constituent winding connections and phase angle dispacements.</Comment>
+         <Comment>The vectorGroup string consists of the following components in the order listed: high voltage winding connection, mid voltage winding connection (for three winding transformers), phase displacement clock number from 0 to 11,  low voltage winding connection</Comment>
+         <Comment>phase displacement clock number from 0 to 11.   The winding connections are D (delta), Y (wye), YN (wye with neutral), Z (zigzag), ZN (zigzag with neutral), A (auto transformer). Upper case means the high voltage, lower case mid or low. The high voltage winding always has clock postion 0 and is not included in the vector group string.  Some examples: YNy0 (two winding wye to wye with no phase displacement), YNd11 (two winding wye to delta with 330 degrees phase displacement), YNyn0d5 (three winding transformer wye with neutral high voltgage, wye with neutral mid voltgage and no phase displacement, delta low voltage with 150 degrees displacement).</Comment>
+         <Comment>Phase displacement is defined as the angular difference between the phasors representing the voltages between the neutral point (real or imaginary) and the corresponding terminals of two windings, a positive sequence voltage system being applied to the high-voltage terminals, following each other in alphabetical sequence if they are lettered, or in numerical sequence if they are numbered: the phasors are assumed to rotate in a counter-clockwise sense.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+      <Reference hideInDiagrams="false"
+                 baseClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+                 type="PowerTransformerEnd"
+                 name="PowerTransformerEnd"
+                 ea_guid="EAID_3F39EE02_42C9_40c1_9FED_1B112858083A-B"
+                 baseProperty="http://iec.ch/TC57/CIM101#PowerTransformer.PowerTransformerEnd"
+                 basePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformer"
+                 minOccurs="0"
+                 maxOccurs="unbounded"
+                 inverseBasePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformer"
+                 inverseBaseProperty="http://iec.ch/TC57/CIM101#PowerTransformerEnd.PowerTransformer">
+         <Comment>The ends of this power transformer.</Comment>
+         <Stereotype label="ByReference">http://langdale.com.au/2005/UML#byreference</Stereotype>
+      </Reference>
+      <InverseReference hideInDiagrams="false"
+                        baseClass="http://iec.ch/TC57/CIM101#PowerTransformer"
+                        ea_guid="EAID_090701F3_4024_453a_95FC_602C045E106A-A"
+                        type="PowerTransformer"
+                        name="PowerTransformer"
+                        baseProperty="http://iec.ch/TC57/CIM101#PowerTransformerEnd.PowerTransformer"
+                        basePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+                        minOccurs="0"
+                        maxOccurs="1"
+                        inverseBasePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+                        inverseBaseProperty="http://iec.ch/TC57/CIM101#PowerTransformer.PowerTransformerEnd">
+         <Comment>The power transformer of this power transformer end.</Comment>
+      </InverseReference>
+   </Root>
+   <Root name="PowerTransformerEnd"
+         hideInDiagrams="false"
+         ea_guid="EAID_C007CD67_5958_44aa_A94A_BBCDB1FFB7CB"
+         baseClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+         package="Wires"
+         packageURI="http://iec.ch/TC57/CIM101#Package_Wires"
+         minOccurs="0"
+         maxOccurs="unbounded">
+      <Comment>A PowerTransformerEnd is associated with each Terminal of a PowerTransformer.</Comment>
+      <Comment>The impdedance values r, r0, x, and x0 of a PowerTransformerEnd represents a star equivalent as follows</Comment>
+      <Comment>1) for a two Terminal PowerTransformer the high voltage PowerTransformerEnd has non zero values on r, r0, x, and x0 while the low voltage PowerTransformerEnd has zero values for r, r0, x, and x0.</Comment>
+      <Comment>2) for a three Terminal PowerTransformer the three PowerTransformerEnds represents a star equivalent with each leg in the star represented by r, r0, x, and x0 values.</Comment>
+      <Comment>3) for a PowerTransformer with more than three Terminals the PowerTransformerEnd impedance values cannot be used. Instead use the TransformerMeshImpedance or split the transformer into multiple PowerTransformers.</Comment>
+      <Stereotype label="Concrete">http://langdale.com.au/2005/UML#concrete</Stereotype>
+      <SuperType name="TransformerEnd"
+                 baseClass="http://iec.ch/TC57/CIM101#TransformerEnd"/>
+      <Domain type="Susceptance"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#Susceptance"
+              xstype="float"
+              name="b"
+              ea_guid="EAID_049B7FAE_6F21_4fa4_9BDC_744C262C99AB"
+              baseProperty="http://iec.ch/TC57/CIM101#PowerTransformerEnd.b"
+              basePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Magnetizing branch susceptance (B mag).  The value can be positive or negative.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Domain type="Susceptance"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#Susceptance"
+              xstype="float"
+              name="b0"
+              ea_guid="EAID_6D010827_FAFB_466e_BE70_C3EB107908C7"
+              baseProperty="http://iec.ch/TC57/CIM101#PowerTransformerEnd.b0"
+              basePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Zero sequence magnetizing branch susceptance.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Reference hideInDiagrams="false"
+                 baseClass="http://iec.ch/TC57/CIM101#WindingConnection"
+                 type="WindingConnection"
+                 name="connectionKind"
+                 ea_guid="EAID_CB63A146_2CA3_4c72_84F1_C82FBC013EBF"
+                 baseProperty="http://iec.ch/TC57/CIM101#PowerTransformerEnd.connectionKind"
+                 basePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+                 minOccurs="0"
+                 maxOccurs="1"
+                 inverseBasePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd">
+         <Comment>Kind of connection.</Comment>
+         <Stereotype label="enumeration">http://langdale.com.au/2005/UML#enumeration</Stereotype>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Reference>
+      <Domain type="Conductance"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#Conductance"
+              xstype="float"
+              name="g"
+              ea_guid="EAID_E494E918_8875_4305_B572_08F4E146A949"
+              baseProperty="http://iec.ch/TC57/CIM101#PowerTransformerEnd.g"
+              basePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Magnetizing branch conductance.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Domain type="Conductance"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#Conductance"
+              xstype="float"
+              name="g0"
+              ea_guid="EAID_F299136B_B10C_4bf4_8253_B76418F5CA92"
+              baseProperty="http://iec.ch/TC57/CIM101#PowerTransformerEnd.g0"
+              basePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Zero sequence magnetizing branch conductance (star-model).</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#integer"
+              xstype="integer"
+              name="phaseAngleClock"
+              ea_guid="EAID_FEC179EC_B122_4b55_88AD_96EA653B9FD2"
+              baseProperty="http://iec.ch/TC57/CIM101#PowerTransformerEnd.phaseAngleClock"
+              basePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Terminal voltage phase angle displacement where 360 degrees are represented with clock hours. The valid values are 0 to 11. For example, for the secondary side end of a transformer with vector group code of 'Dyn11', specify the connection kind as wye with neutral and specify the phase angle of the clock as 11.  The clock value of the transformer end number specified as 1, is assumed to be zero.  Note the transformer end number is not assumed to be the same as the terminal sequence number.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+      <Domain type="Resistance"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#Resistance"
+              xstype="float"
+              name="r"
+              ea_guid="EAID_324CD187_AF2D_4e7f_A42B_7AAABAA186B5"
+              baseProperty="http://iec.ch/TC57/CIM101#PowerTransformerEnd.r"
+              basePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Resistance (star-model) of the transformer end.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Domain type="Resistance"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#Resistance"
+              xstype="float"
+              name="r0"
+              ea_guid="EAID_A9A99D89_21BE_410f_9FA9_7AC79D60D262"
+              baseProperty="http://iec.ch/TC57/CIM101#PowerTransformerEnd.r0"
+              basePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Zero sequence series resistance (star-model) of the transformer end.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Domain type="ApparentPower"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#ApparentPower"
+              xstype="float"
+              name="ratedS"
+              ea_guid="EAID_A163439E_6F95_4ae3_B0E4_D067A4918DC8"
+              baseProperty="http://iec.ch/TC57/CIM101#PowerTransformerEnd.ratedS"
+              basePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Normal apparent power rating.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Domain type="Voltage"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#Voltage"
+              xstype="float"
+              name="ratedU"
+              ea_guid="EAID_38795744_6A3E_4a62_A8D9_E3FCF020A456"
+              baseProperty="http://iec.ch/TC57/CIM101#PowerTransformerEnd.ratedU"
+              basePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Rated voltage: phase-phase for three-phase windings, and either phase-phase or phase-neutral for single-phase windings.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Domain type="Reactance"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#Reactance"
+              xstype="float"
+              name="x"
+              ea_guid="EAID_0DDEF3C0_D3D0_475e_8C6F_D7363D0E5AF4"
+              baseProperty="http://iec.ch/TC57/CIM101#PowerTransformerEnd.x"
+              basePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Positive sequence series reactance (star-model) of the transformer end.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Domain type="Reactance"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#Reactance"
+              xstype="float"
+              name="x0"
+              ea_guid="EAID_BC8BC774_9364_4c99_854B_27F9C31B1439"
+              baseProperty="http://iec.ch/TC57/CIM101#PowerTransformerEnd.x0"
+              basePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Zero sequence series reactance of the transformer end.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Reference hideInDiagrams="false"
+                 baseClass="http://iec.ch/TC57/CIM101#PowerTransformer"
+                 type="PowerTransformer"
+                 name="PowerTransformer"
+                 ea_guid="EAID_090701F3_4024_453a_95FC_602C045E106A-A"
+                 baseProperty="http://iec.ch/TC57/CIM101#PowerTransformerEnd.PowerTransformer"
+                 basePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+                 minOccurs="0"
+                 maxOccurs="1"
+                 inverseBasePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+                 inverseBaseProperty="http://iec.ch/TC57/CIM101#PowerTransformer.PowerTransformerEnd">
+         <Comment>The power transformer of this power transformer end.</Comment>
+         <Stereotype label="ByReference">http://langdale.com.au/2005/UML#byreference</Stereotype>
+      </Reference>
+      <InverseReference hideInDiagrams="false"
+                        baseClass="http://iec.ch/TC57/CIM101#PowerTransformerEnd"
+                        ea_guid="EAID_3F39EE02_42C9_40c1_9FED_1B112858083A-B"
+                        type="PowerTransformerEnd"
+                        name="PowerTransformerEnd"
+                        baseProperty="http://iec.ch/TC57/CIM101#PowerTransformer.PowerTransformerEnd"
+                        basePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformer"
+                        minOccurs="0"
+                        maxOccurs="unbounded"
+                        inverseBasePropertyClass="http://iec.ch/TC57/CIM101#PowerTransformer"
+                        inverseBaseProperty="http://iec.ch/TC57/CIM101#PowerTransformerEnd.PowerTransformer">
+         <Comment>The ends of this power transformer.</Comment>
+      </InverseReference>
+   </Root>
+   <ComplexType name="RegulatingControl"
+                hideInDiagrams="false"
+                ea_guid="EAID_50DEB3C4_DD47_40e5_BB19_9C4FF2CC43F6"
+                baseClass="http://iec.ch/TC57/CIM101#RegulatingControl"
+                package="Wires"
+                packageURI="http://iec.ch/TC57/CIM101#Package_Wires"
+                minOccurs="0"
+                maxOccurs="unbounded">
+      <Comment>Specifies a set of equipment that works together to control a power system quantity such as voltage or flow.</Comment>
+      <SuperType name="PowerSystemResource"
+                 baseClass="http://iec.ch/TC57/CIM101#PowerSystemResource"/>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#boolean"
+              xstype="boolean"
+              name="discrete"
+              ea_guid="EAID_D2E751EB_C3FE_4dc9_9E15_E527FF13653E"
+              baseProperty="http://iec.ch/TC57/CIM101#RegulatingControl.discrete"
+              basePropertyClass="http://iec.ch/TC57/CIM101#RegulatingControl"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>The regulation is performed in a discrete mode.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+      <Reference hideInDiagrams="false"
+                 baseClass="http://iec.ch/TC57/CIM101#RegulatingControlModeKind"
+                 type="RegulatingControlModeKind"
+                 name="mode"
+                 ea_guid="EAID_91E5AE28_5FCC_4a63_8146_B859CEE34818"
+                 baseProperty="http://iec.ch/TC57/CIM101#RegulatingControl.mode"
+                 basePropertyClass="http://iec.ch/TC57/CIM101#RegulatingControl"
+                 minOccurs="0"
+                 maxOccurs="1"
+                 inverseBasePropertyClass="http://iec.ch/TC57/CIM101#RegulatingControl">
+         <Comment>The regulating control mode presently available.  This specifications allows for determining the kind of regualation without need for obtaining the units from a schedule.</Comment>
+         <Stereotype label="enumeration">http://langdale.com.au/2005/UML#enumeration</Stereotype>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Reference>
+      <Reference hideInDiagrams="false"
+                 baseClass="http://iec.ch/TC57/CIM101#PhaseCode"
+                 type="PhaseCode"
+                 name="monitoredPhase"
+                 ea_guid="EAID_B9077767_B284_4367_B348_49F6F381A7FB"
+                 baseProperty="http://iec.ch/TC57/CIM101#RegulatingControl.monitoredPhase"
+                 basePropertyClass="http://iec.ch/TC57/CIM101#RegulatingControl"
+                 minOccurs="0"
+                 maxOccurs="1"
+                 inverseBasePropertyClass="http://iec.ch/TC57/CIM101#RegulatingControl">
+         <Comment>Phase voltage controlling this regulator, measured at regulator location.</Comment>
+         <Stereotype label="enumeration">http://langdale.com.au/2005/UML#enumeration</Stereotype>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Reference>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#float"
+              xstype="float"
+              name="targetRange"
+              ea_guid="EAID_48C1B749_FF7D_43f3_8103_89216E1CDCE5"
+              baseProperty="http://iec.ch/TC57/CIM101#RegulatingControl.targetRange"
+              basePropertyClass="http://iec.ch/TC57/CIM101#RegulatingControl"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>This is the case input target range.   This performs the same function as the value2 attribute on the regulation schedule in the case that schedules are not used.   The units of those appropriate for the mode.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#float"
+              xstype="float"
+              name="targetValue"
+              ea_guid="EAID_7C48B0D1_3907_49d3_A507_AD35D667F235"
+              baseProperty="http://iec.ch/TC57/CIM101#RegulatingControl.targetValue"
+              basePropertyClass="http://iec.ch/TC57/CIM101#RegulatingControl"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>The target value specified for case input.   This value can be used for the target value wihout the use of schedules. The value has the units appropriate to the mode attribute.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+      <Reference hideInDiagrams="false"
+                 baseClass="http://iec.ch/TC57/CIM101#Terminal"
+                 type="Terminal"
+                 name="Terminal"
+                 ea_guid="EAID_CB324263_EDEE_4890_85BB_2599EBF4887C-A"
+                 baseProperty="http://iec.ch/TC57/CIM101#RegulatingControl.Terminal"
+                 basePropertyClass="http://iec.ch/TC57/CIM101#RegulatingControl"
+                 minOccurs="0"
+                 maxOccurs="1"
+                 inverseBasePropertyClass="http://iec.ch/TC57/CIM101#RegulatingControl"
+                 inverseBaseProperty="http://iec.ch/TC57/CIM101#Terminal.RegulatingControl">
+         <Comment>The terminal associated with this regulating control.  The terminal is associated instead of a node, since the terminal could connect into either a topological node (bus in bus-branch model) or a connectivity node (detailed switch model).  Sometimes it is useful to model regulation at a terminal of a bus bar object since the bus bar can be present in both a bus-branch model or a model with switch detail.</Comment>
+         <Stereotype label="ByReference">http://langdale.com.au/2005/UML#byreference</Stereotype>
+      </Reference>
+      <InverseReference hideInDiagrams="false"
+                        baseClass="http://iec.ch/TC57/CIM101#RegulatingControl"
+                        ea_guid="EAID_39BF06C6_7233_48aa_A3E3_5C014C1FA4D3-B"
+                        type="RegulatingControl"
+                        name="RegulatingControl"
+                        baseProperty="http://iec.ch/TC57/CIM101#Terminal.RegulatingControl"
+                        basePropertyClass="http://iec.ch/TC57/CIM101#Terminal"
+                        minOccurs="0"
+                        maxOccurs="unbounded"
+                        inverseBasePropertyClass="http://iec.ch/TC57/CIM101#Terminal"
+                        inverseBaseProperty="http://iec.ch/TC57/CIM101#RegulatingControl.Terminal">
+         <Comment>The controls regulating this terminal.</Comment>
+      </InverseReference>
+   </ComplexType>
+   <Root name="TapChanger"
+         hideInDiagrams="false"
+         ea_guid="EAID_301A55AD_3215_463c_8635_77D891CBF6BC"
+         baseClass="http://iec.ch/TC57/CIM101#TapChanger"
+         package="Wires"
+         packageURI="http://iec.ch/TC57/CIM101#Package_Wires"
+         minOccurs="0"
+         maxOccurs="unbounded">
+      <Comment>Mechanism for changing transformer winding tap positions.</Comment>
+      <Stereotype label="Concrete">http://langdale.com.au/2005/UML#concrete</Stereotype>
+      <SuperType name="PowerSystemResource"
+                 baseClass="http://iec.ch/TC57/CIM101#PowerSystemResource"/>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#integer"
+              xstype="integer"
+              name="highStep"
+              ea_guid="EAID_3A8FC0AF_9DEF_4985_8AD3_121F46C0B16B"
+              baseProperty="http://iec.ch/TC57/CIM101#TapChanger.highStep"
+              basePropertyClass="http://iec.ch/TC57/CIM101#TapChanger"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Highest possible tap step position, advance from neutral</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+      <Domain type="Seconds"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#Seconds"
+              xstype="float"
+              name="initialDelay"
+              ea_guid="EAID_B3BED42E_0BE0_4e42_946A_C840BBB3AD07"
+              baseProperty="http://iec.ch/TC57/CIM101#TapChanger.initialDelay"
+              basePropertyClass="http://iec.ch/TC57/CIM101#TapChanger"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>For an LTC, the delay for initial tap changer operation (first step change)</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#integer"
+              xstype="integer"
+              name="lowStep"
+              ea_guid="EAID_57009E8A_8495_4155_B7F2_7FA1C49BE82B"
+              baseProperty="http://iec.ch/TC57/CIM101#TapChanger.lowStep"
+              basePropertyClass="http://iec.ch/TC57/CIM101#TapChanger"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Lowest possible tap step position, retard from neutral</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#boolean"
+              xstype="boolean"
+              name="ltcFlag"
+              ea_guid="EAID_DA8B32CA_3C0B_4913_8EED_F08BF2818AFD"
+              baseProperty="http://iec.ch/TC57/CIM101#TapChanger.ltcFlag"
+              basePropertyClass="http://iec.ch/TC57/CIM101#TapChanger"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Specifies whether or not a TapChanger has load tap changing capabilities.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#integer"
+              xstype="integer"
+              name="neutralStep"
+              ea_guid="EAID_2E0E2A31_9A8E_45a3_8EA4_47A5A314C8DA"
+              baseProperty="http://iec.ch/TC57/CIM101#TapChanger.neutralStep"
+              basePropertyClass="http://iec.ch/TC57/CIM101#TapChanger"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>The neutral tap step position for this winding.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+      <Domain type="Voltage"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#Voltage"
+              xstype="float"
+              name="neutralU"
+              ea_guid="EAID_FE65219A_06C4_4be2_91EE_0BD045438978"
+              baseProperty="http://iec.ch/TC57/CIM101#TapChanger.neutralU"
+              basePropertyClass="http://iec.ch/TC57/CIM101#TapChanger"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Voltage at which the winding operates at the neutral tap setting.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#integer"
+              xstype="integer"
+              name="normalStep"
+              ea_guid="EAID_7470956A_8E70_4c0d_BBCE_37D0A4D7CE60"
+              baseProperty="http://iec.ch/TC57/CIM101#TapChanger.normalStep"
+              basePropertyClass="http://iec.ch/TC57/CIM101#TapChanger"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>The tap step position used in "normal" network operation for this winding. For a "Fixed" tap changer indicates the current physical tap setting.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#boolean"
+              xstype="boolean"
+              name="regulationStatus"
+              ea_guid="EAID_EB67A07B_E24F_4c36_85B2_07998D5C49C5"
+              baseProperty="http://iec.ch/TC57/CIM101#TapChanger.regulationStatus"
+              basePropertyClass="http://iec.ch/TC57/CIM101#TapChanger"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Specifies the default regulation status of the TapChanger.  True is regulating.  False is not regulating.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+      <Domain type="Seconds"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#Seconds"
+              xstype="float"
+              name="subsequentDelay"
+              ea_guid="EAID_9F879132_96BC_4235_BAC5_B28D96CC228B"
+              baseProperty="http://iec.ch/TC57/CIM101#TapChanger.subsequentDelay"
+              basePropertyClass="http://iec.ch/TC57/CIM101#TapChanger"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>For an LTC, the delay for subsequent tap changer operation (second and later step changes)</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Reference hideInDiagrams="false"
+                 baseClass="http://iec.ch/TC57/CIM101#TapChangerControl"
+                 type="TapChangerControl"
+                 name="TapChangerControl"
+                 ea_guid="EAID_B7886F51_A82E_4fbf_AE3E_2E734C0A54CC-B"
+                 baseProperty="http://iec.ch/TC57/CIM101#TapChanger.TapChangerControl"
+                 basePropertyClass="http://iec.ch/TC57/CIM101#TapChanger"
+                 minOccurs="0"
+                 maxOccurs="1"
+                 inverseBasePropertyClass="http://iec.ch/TC57/CIM101#TapChanger"
+                 inverseBaseProperty="http://iec.ch/TC57/CIM101#TapChangerControl.TapChanger">
+         <Comment>The regulating control scheme in which this tap changer participates.</Comment>
+         <Stereotype label="ByReference">http://langdale.com.au/2005/UML#byreference</Stereotype>
+      </Reference>
+      <InverseReference hideInDiagrams="false"
+                        baseClass="http://iec.ch/TC57/CIM101#TapChanger"
+                        ea_guid="EAID_422A1828_CD78_4432_8BAE_244E4B58419D-A"
+                        type="TapChanger"
+                        name="TapChanger"
+                        baseProperty="http://iec.ch/TC57/CIM101#TapChangerControl.TapChanger"
+                        basePropertyClass="http://iec.ch/TC57/CIM101#TapChangerControl"
+                        minOccurs="0"
+                        maxOccurs="unbounded"
+                        inverseBasePropertyClass="http://iec.ch/TC57/CIM101#TapChangerControl"
+                        inverseBaseProperty="http://iec.ch/TC57/CIM101#TapChanger.TapChangerControl">
+         <Comment>The tap changers that participates in this regulating tap control scheme.</Comment>
+      </InverseReference>
+   </Root>
+   <Root name="TapChangerControl"
+         hideInDiagrams="false"
+         ea_guid="EAID_61BD1D59_0E5F_494d_B113_04DAAF8D41B9"
+         baseClass="http://iec.ch/TC57/CIM101#TapChangerControl"
+         package="Wires"
+         packageURI="http://iec.ch/TC57/CIM101#Package_Wires"
+         minOccurs="0"
+         maxOccurs="unbounded">
+      <Comment>Discribes behaviour specific to tap changers, e.g. how the voltage at the end of a line varies with the load level and compensation of the voltage drop by tap adjustment.</Comment>
+      <Stereotype label="Concrete">http://langdale.com.au/2005/UML#concrete</Stereotype>
+      <SuperType name="RegulatingControl"
+                 baseClass="http://iec.ch/TC57/CIM101#RegulatingControl"/>
+      <Domain type="Voltage"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#Voltage"
+              xstype="float"
+              name="limitVoltage"
+              ea_guid="EAID_ABA94D0E_AC14_4ed8_8548_43E8C6A1FEC1"
+              baseProperty="http://iec.ch/TC57/CIM101#TapChangerControl.limitVoltage"
+              basePropertyClass="http://iec.ch/TC57/CIM101#TapChangerControl"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Maximum allowed regulated voltage on the PT secondary, regardless of line drop compensation. Sometimes referred to as first-house protection.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#boolean"
+              xstype="boolean"
+              name="lineDropCompensation"
+              ea_guid="EAID_0DFB1938_959E_4ede_BF20_0A418D722484"
+              baseProperty="http://iec.ch/TC57/CIM101#TapChangerControl.lineDropCompensation"
+              basePropertyClass="http://iec.ch/TC57/CIM101#TapChangerControl"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>If true, the line drop compensation is to be applied.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+      <Domain type="Resistance"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#Resistance"
+              xstype="float"
+              name="lineDropR"
+              ea_guid="EAID_B8A90320_0AFA_4bb1_87EA_B6B267822F27"
+              baseProperty="http://iec.ch/TC57/CIM101#TapChangerControl.lineDropR"
+              basePropertyClass="http://iec.ch/TC57/CIM101#TapChangerControl"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Line drop compensator resistance setting for normal (forward) power flow.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Domain type="Reactance"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#Reactance"
+              xstype="float"
+              name="lineDropX"
+              ea_guid="EAID_D6A2E1BF_8A79_452f_90DE_145CAAA61412"
+              baseProperty="http://iec.ch/TC57/CIM101#TapChangerControl.lineDropX"
+              basePropertyClass="http://iec.ch/TC57/CIM101#TapChangerControl"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Line drop compensator reactance setting for normal (forward) power flow.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Domain type="Resistance"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#Resistance"
+              xstype="float"
+              name="reverseLineDropR"
+              ea_guid="EAID_BAC065B4_38D7_434c_B151_50D66FE230EA"
+              baseProperty="http://iec.ch/TC57/CIM101#TapChangerControl.reverseLineDropR"
+              basePropertyClass="http://iec.ch/TC57/CIM101#TapChangerControl"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Line drop compensator resistance setting for reverse power flow.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Domain type="Reactance"
+              hideInDiagrams="false"
+              dataType="http://iec.ch/TC57/CIM101#Reactance"
+              xstype="float"
+              name="reverseLineDropX"
+              ea_guid="EAID_A26D105D_39EE_48ca_9A1D_4145144D59E1"
+              baseProperty="http://iec.ch/TC57/CIM101#TapChangerControl.reverseLineDropX"
+              basePropertyClass="http://iec.ch/TC57/CIM101#TapChangerControl"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>Line drop compensator reactance setting for reverse power flow.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Domain>
+      <Reference hideInDiagrams="false"
+                 baseClass="http://iec.ch/TC57/CIM101#TapChanger"
+                 type="TapChanger"
+                 name="TapChanger"
+                 ea_guid="EAID_422A1828_CD78_4432_8BAE_244E4B58419D-A"
+                 baseProperty="http://iec.ch/TC57/CIM101#TapChangerControl.TapChanger"
+                 basePropertyClass="http://iec.ch/TC57/CIM101#TapChangerControl"
+                 minOccurs="0"
+                 maxOccurs="unbounded"
+                 inverseBasePropertyClass="http://iec.ch/TC57/CIM101#TapChangerControl"
+                 inverseBaseProperty="http://iec.ch/TC57/CIM101#TapChanger.TapChangerControl">
+         <Comment>The tap changers that participates in this regulating tap control scheme.</Comment>
+         <Stereotype label="ByReference">http://langdale.com.au/2005/UML#byreference</Stereotype>
+      </Reference>
+      <InverseReference hideInDiagrams="false"
+                        baseClass="http://iec.ch/TC57/CIM101#TapChangerControl"
+                        ea_guid="EAID_B7886F51_A82E_4fbf_AE3E_2E734C0A54CC-B"
+                        type="TapChangerControl"
+                        name="TapChangerControl"
+                        baseProperty="http://iec.ch/TC57/CIM101#TapChanger.TapChangerControl"
+                        basePropertyClass="http://iec.ch/TC57/CIM101#TapChanger"
+                        minOccurs="0"
+                        maxOccurs="1"
+                        inverseBasePropertyClass="http://iec.ch/TC57/CIM101#TapChanger"
+                        inverseBaseProperty="http://iec.ch/TC57/CIM101#TapChangerControl.TapChanger">
+         <Comment>The regulating control scheme in which this tap changer participates.</Comment>
+      </InverseReference>
+   </Root>
+   <Root name="Terminal"
+         hideInDiagrams="false"
+         ea_guid="EAID_C06E654E_B9F9_437d_9700_358A563312AC"
+         baseClass="http://iec.ch/TC57/CIM101#Terminal"
+         package="IES_Projects"
+         packageURI="http://iec.ch/TC57/CIM101#Package_IES_Projects"
+         minOccurs="0"
+         maxOccurs="unbounded">
+      <Comment>An electrical connection point to a piece of conducting equipment. Terminals are connected at physical connection points called connectivity nodes.</Comment>
+      <Stereotype label="Concrete">http://langdale.com.au/2005/UML#concrete</Stereotype>
+      <SuperType name="IdentifiedObject"
+                 baseClass="http://iec.ch/TC57/CIM101#IdentifiedObject"/>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#boolean"
+              xstype="boolean"
+              name="connected"
+              ea_guid="EAID_6FC86474_0D37_4f69_B4EA_ADF12EAE41BE"
+              baseProperty="http://iec.ch/TC57/CIM101#Terminal.connected"
+              basePropertyClass="http://iec.ch/TC57/CIM101#Terminal"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>The connected status is related to a bus-branch model and the topological node to terminal relation.  True implies the terminal is connected to the related topological node and false implies it is not.</Comment>
+         <Comment>In a bus-branch model, the connected status is used to tell if equipment is disconnected without having to change the connectivity described by the topological node to terminal relation. A valid case is that conducting equipment can be connected in one end and open in the other. In particular for an AC line segment, where the reactive line charging can be significant, this is a relevant case.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+      <Reference hideInDiagrams="false"
+                 baseClass="http://iec.ch/TC57/CIM101#PhaseCode"
+                 type="PhaseCode"
+                 name="phases"
+                 ea_guid="EAID_D4E1F8A7_92AA_4f75_A79A_ECEEEBE030B0"
+                 baseProperty="http://iec.ch/TC57/CIM101#Terminal.phases"
+                 basePropertyClass="http://iec.ch/TC57/CIM101#Terminal"
+                 minOccurs="0"
+                 maxOccurs="1"
+                 inverseBasePropertyClass="http://iec.ch/TC57/CIM101#Terminal">
+         <Comment>Represents the normal network phasing condition.</Comment>
+         <Stereotype label="enumeration">http://langdale.com.au/2005/UML#enumeration</Stereotype>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Reference>
+      <Simple hideInDiagrams="false"
+              dataType="http://www.w3.org/2001/XMLSchema#integer"
+              xstype="integer"
+              name="sequenceNumber"
+              ea_guid="EAID_58CF8E42_86B1_4daf_AF1F_C13D37171E67"
+              baseProperty="http://iec.ch/TC57/CIM101#Terminal.sequenceNumber"
+              basePropertyClass="http://iec.ch/TC57/CIM101#Terminal"
+              minOccurs="0"
+              maxOccurs="1">
+         <Comment>The orientation of the terminal connections for a multiple terminal conducting equipment.  The sequence numbering starts with 1 and additional terminals should follow in increasing order.   The first terminal is the "starting point" for a two terminal branch.</Comment>
+         <Stereotype label="Attribute">http://langdale.com.au/2005/UML#attribute</Stereotype>
+      </Simple>
+      <Reference hideInDiagrams="false"
+                 baseClass="http://iec.ch/TC57/CIM101#ConductingEquipment"
+                 type="ConductingEquipment"
+                 name="ConductingEquipment"
+                 ea_guid="EAID_0BD6F461_EDFB_404b_96F9_2E120A6D6462-B"
+                 baseProperty="http://iec.ch/TC57/CIM101#Terminal.ConductingEquipment"
+                 basePropertyClass="http://iec.ch/TC57/CIM101#Terminal"
+                 minOccurs="1"
+                 maxOccurs="1"
+                 inverseBasePropertyClass="http://iec.ch/TC57/CIM101#Terminal"
+                 inverseBaseProperty="http://iec.ch/TC57/CIM101#ConductingEquipment.Terminals">
+         <Comment>The conducting equipment of the terminal.  Conducting equipment have  terminals that may be connected to other conducting equipment terminals via connectivity nodes or topological nodes.</Comment>
+         <Stereotype label="ByReference">http://langdale.com.au/2005/UML#byreference</Stereotype>
+      </Reference>
+      <InverseReference hideInDiagrams="false"
+                        baseClass="http://iec.ch/TC57/CIM101#Terminal"
+                        ea_guid="EAID_F3811EC7_5874_410e_BEDA_C23A6F0267B8-A"
+                        type="Terminal"
+                        name="Terminals"
+                        baseProperty="http://iec.ch/TC57/CIM101#ConductingEquipment.Terminals"
+                        basePropertyClass="http://iec.ch/TC57/CIM101#ConductingEquipment"
+                        minOccurs="0"
+                        maxOccurs="unbounded"
+                        inverseBasePropertyClass="http://iec.ch/TC57/CIM101#ConductingEquipment"
+                        inverseBaseProperty="http://iec.ch/TC57/CIM101#Terminal.ConductingEquipment">
+         <Comment>Conducting equipment have terminals that may be connected to other conducting equipment terminals via connectivity nodes or topological nodes.</Comment>
+      </InverseReference>
+      <Reference hideInDiagrams="false"
+                 baseClass="http://iec.ch/TC57/CIM101#RegulatingControl"
+                 type="RegulatingControl"
+                 name="RegulatingControl"
+                 ea_guid="EAID_39BF06C6_7233_48aa_A3E3_5C014C1FA4D3-B"
+                 baseProperty="http://iec.ch/TC57/CIM101#Terminal.RegulatingControl"
+                 basePropertyClass="http://iec.ch/TC57/CIM101#Terminal"
+                 minOccurs="0"
+                 maxOccurs="unbounded"
+                 inverseBasePropertyClass="http://iec.ch/TC57/CIM101#Terminal"
+                 inverseBaseProperty="http://iec.ch/TC57/CIM101#RegulatingControl.Terminal">
+         <Comment>The controls regulating this terminal.</Comment>
+         <Stereotype label="ByReference">http://langdale.com.au/2005/UML#byreference</Stereotype>
+      </Reference>
+      <InverseReference hideInDiagrams="false"
+                        baseClass="http://iec.ch/TC57/CIM101#Terminal"
+                        ea_guid="EAID_CB324263_EDEE_4890_85BB_2599EBF4887C-A"
+                        type="Terminal"
+                        name="Terminal"
+                        baseProperty="http://iec.ch/TC57/CIM101#RegulatingControl.Terminal"
+                        basePropertyClass="http://iec.ch/TC57/CIM101#RegulatingControl"
+                        minOccurs="0"
+                        maxOccurs="1"
+                        inverseBasePropertyClass="http://iec.ch/TC57/CIM101#RegulatingControl"
+                        inverseBaseProperty="http://iec.ch/TC57/CIM101#Terminal.RegulatingControl">
+         <Comment>The terminal associated with this regulating control.  The terminal is associated instead of a node, since the terminal could connect into either a topological node (bus in bus-branch model) or a connectivity node (detailed switch model).  Sometimes it is useful to model regulation at a terminal of a bus bar object since the bus bar can be present in both a bus-branch model or a model with switch detail.</Comment>
+      </InverseReference>
+      <Reference hideInDiagrams="false"
+                 baseClass="http://iec.ch/TC57/CIM101#TransformerEnd"
+                 type="TransformerEnd"
+                 name="TransformerEnd"
+                 ea_guid="EAID_9294317F_690A_4e1c_93CC_DE175223B446-A"
+                 baseProperty="http://iec.ch/TC57/CIM101#Terminal.TransformerEnd"
+                 basePropertyClass="http://iec.ch/TC57/CIM101#Terminal"
+                 minOccurs="0"
+                 maxOccurs="unbounded"
+                 inverseBasePropertyClass="http://iec.ch/TC57/CIM101#Terminal"
+                 inverseBaseProperty="http://iec.ch/TC57/CIM101#TransformerEnd.Terminal">
+         <Comment>All transformer ends connected at this terminal.</Comment>
+         <Stereotype label="ByReference">http://langdale.com.au/2005/UML#byreference</Stereotype>
+      </Reference>
+      <InverseReference hideInDiagrams="false"
+                        baseClass="http://iec.ch/TC57/CIM101#Terminal"
+                        ea_guid="EAID_D0B58985_3221_42af_A27C_F0D98235FECA-B"
+                        type="Terminal"
+                        name="Terminal"
+                        baseProperty="http://iec.ch/TC57/CIM101#TransformerEnd.Terminal"
+                        basePropertyClass="http://iec.ch/TC57/CIM101#TransformerEnd"
+                        minOccurs="0"
+                        maxOccurs="1"
+                        inverseBasePropertyClass="http://iec.ch/TC57/CIM101#TransformerEnd"
+                        inverseBaseProperty="http://iec.ch/TC57/CIM101#Terminal.TransformerEnd">
+         <Comment>Terminal of the power transformer to which this transformer end belongs.</Comment>
+      </InverseReference>
+   </Root>
+   <ComplexType name="TransformerEnd"
+                hideInDiagrams="false"
+                ea_guid="EAID_58084E56_12D7_4519_A8E2_3E5A5B49247E"
+                baseClass="http://iec.ch/TC57/CIM101#TransformerEnd"
+                package="Wires"
+                packageURI="http://iec.ch/TC57/CIM101#Package_Wires"
+                minOccurs="0"
+                maxOccurs="unbounded">
+      <Comment>A conducting connection point of a power transformer. It corresponds to a physical transformer winding terminal.  In earlier CIM versions, the TransformerWinding class served a similar purpose, but this class is more flexible because it associates to terminal but is not a specialization of ConductingEquipment.</Comment>
+      <SuperType name="IdentifiedObject"
+                 baseClass="http://iec.ch/TC57/CIM101#IdentifiedObject"/>
+      <Reference hideInDiagrams="false"
+                 baseClass="http://iec.ch/TC57/CIM101#Terminal"
+                 type="Terminal"
+                 name="Terminal"
+                 ea_guid="EAID_D0B58985_3221_42af_A27C_F0D98235FECA-B"
+                 baseProperty="http://iec.ch/TC57/CIM101#TransformerEnd.Terminal"
+                 basePropertyClass="http://iec.ch/TC57/CIM101#TransformerEnd"
+                 minOccurs="0"
+                 maxOccurs="1"
+                 inverseBasePropertyClass="http://iec.ch/TC57/CIM101#TransformerEnd"
+                 inverseBaseProperty="http://iec.ch/TC57/CIM101#Terminal.TransformerEnd">
+         <Comment>Terminal of the power transformer to which this transformer end belongs.</Comment>
+         <Stereotype label="ByReference">http://langdale.com.au/2005/UML#byreference</Stereotype>
+      </Reference>
+      <InverseReference hideInDiagrams="false"
+                        baseClass="http://iec.ch/TC57/CIM101#TransformerEnd"
+                        ea_guid="EAID_9294317F_690A_4e1c_93CC_DE175223B446-A"
+                        type="TransformerEnd"
+                        name="TransformerEnd"
+                        baseProperty="http://iec.ch/TC57/CIM101#Terminal.TransformerEnd"
+                        basePropertyClass="http://iec.ch/TC57/CIM101#Terminal"
+                        minOccurs="0"
+                        maxOccurs="unbounded"
+                        inverseBasePropertyClass="http://iec.ch/TC57/CIM101#Terminal"
+                        inverseBaseProperty="http://iec.ch/TC57/CIM101#TransformerEnd.Terminal">
+         <Comment>All transformer ends connected at this terminal.</Comment>
+      </InverseReference>
+   </ComplexType>
+   <SimpleType dataType="http://iec.ch/TC57/CIM101#Susceptance"
+               name="Susceptance"
+               ea_guid="EAID_F246F97E_529D_4ec3_9F06_BAF4AFD0829B"
+               package="Domain"
+               packageURI="http://iec.ch/TC57/CIM101#Package_Domain"
+               xstype="float">
+      <Comment>Imaginary part of admittance.</Comment>
+   </SimpleType>
+   <SimpleType dataType="http://iec.ch/TC57/CIM101#ApparentPower"
+               name="ApparentPower"
+               ea_guid="EAID_95576B4A_D9AC_49fc_82ED_CB6DB2CE8584"
+               package="Domain"
+               packageURI="http://iec.ch/TC57/CIM101#Package_Domain"
+               xstype="float">
+      <Comment>Product of the RMS value of the voltage and the RMS value of the current.</Comment>
+   </SimpleType>
+   <SimpleType dataType="http://iec.ch/TC57/CIM101#Reactance"
+               name="Reactance"
+               ea_guid="EAID_F1C90FB4_B7BE_4528_A974_E36BBEAB8616"
+               package="Domain"
+               packageURI="http://iec.ch/TC57/CIM101#Package_Domain"
+               xstype="float">
+      <Comment>Reactance (imaginary part of impedance), at rated frequency.</Comment>
+   </SimpleType>
+   <SimpleType dataType="http://iec.ch/TC57/CIM101#Seconds"
+               name="Seconds"
+               ea_guid="EAID_A2008978_193D_4955_8102_599E43C7CFE4"
+               package="Domain"
+               packageURI="http://iec.ch/TC57/CIM101#Package_Domain"
+               xstype="float">
+      <Comment>Time, in seconds.</Comment>
+   </SimpleType>
+   <SimpleType dataType="http://iec.ch/TC57/CIM101#Resistance"
+               name="Resistance"
+               ea_guid="EAID_EDB281E6_BBB4_438d_953B_7D746CAF55B5"
+               package="Domain"
+               packageURI="http://iec.ch/TC57/CIM101#Package_Domain"
+               xstype="float">
+      <Comment>Resistance (real part of impedance).</Comment>
+   </SimpleType>
+   <SimpleType dataType="http://iec.ch/TC57/CIM101#Conductance"
+               name="Conductance"
+               ea_guid="EAID_CCE4615A_C403_4c96_8122_26904C128276"
+               package="Domain"
+               packageURI="http://iec.ch/TC57/CIM101#Package_Domain"
+               xstype="float">
+      <Comment>Factor by which voltage must be multiplied to give corresponding power lost from a circuit. Real part of admittance.</Comment>
+   </SimpleType>
+   <SimpleType dataType="http://iec.ch/TC57/CIM101#Voltage"
+               name="Voltage"
+               ea_guid="EAID_233C330A_11B8_4705_879C_5497380F1D82"
+               package="Domain"
+               packageURI="http://iec.ch/TC57/CIM101#Package_Domain"
+               xstype="float">
+      <Comment>Electrical voltage.</Comment>
+   </SimpleType>
+</Catalog>
