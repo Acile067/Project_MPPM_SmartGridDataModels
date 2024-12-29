@@ -866,21 +866,26 @@ namespace FTN.Common
 
 		private void InitializeTypeIdsInInsertOrder()
 		{			
-			typeIdsInInsertOrder.Add(ModelCode.BASEVOLTAGE);
-			typeIdsInInsertOrder.Add(ModelCode.LOCATION);
+			typeIdsInInsertOrder.Add(ModelCode.TAPCHANGER);
+			typeIdsInInsertOrder.Add(ModelCode.TERMINAL);
 			typeIdsInInsertOrder.Add(ModelCode.POWERTR);
-			typeIdsInInsertOrder.Add(ModelCode.POWERTRWINDING);
-			typeIdsInInsertOrder.Add(ModelCode.WINDINGTEST);			
+			typeIdsInInsertOrder.Add(ModelCode.POWERTREND);
+			typeIdsInInsertOrder.Add(ModelCode.TAPCHANGCONTROL);			
 		}
 
 		private void InitializeNotSettablePropertyIds()
 		{			
 			notSettablePropertyIds.Add(ModelCode.IDOBJ_GID);
-			notSettablePropertyIds.Add(ModelCode.BASEVOLTAGE_CONDEQS);
-			notSettablePropertyIds.Add(ModelCode.LOCATION_PSRS);
-			notSettablePropertyIds.Add(ModelCode.POWERTRWINDING_TESTS);
-            notSettablePropertyIds.Add(ModelCode.POWERTR_WINDINGS);	
-		}
+			notSettablePropertyIds.Add(ModelCode.TERMINAL_CONDEQUIPMENT);
+			notSettablePropertyIds.Add(ModelCode.TERMINAL_REGCONTROLS);
+			notSettablePropertyIds.Add(ModelCode.TERMINAL_TRANSENDS);
+            notSettablePropertyIds.Add(ModelCode.CONDEQUIPMENT_TERMINALS);
+            notSettablePropertyIds.Add(ModelCode.TRANSEND_TERMINAL);
+            notSettablePropertyIds.Add(ModelCode.TAPCHANGER_TCC);
+            notSettablePropertyIds.Add(ModelCode.TAPCHANGCONTROL_TAPCHANGS);
+            notSettablePropertyIds.Add(ModelCode.POWERTREND_POWTRANSFORMER);
+            notSettablePropertyIds.Add(ModelCode.POWERTR_POWERTRENDS);
+        }
 	
 		# endregion Initialization of metadata
 
