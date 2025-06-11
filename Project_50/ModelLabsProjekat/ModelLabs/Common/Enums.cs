@@ -22,18 +22,6 @@ namespace FTN.Common
 		ABCN = 0xF
 	}
 	
-	public enum TransformerFunction : short
-	{
-		Supply = 1,				// Supply transformer
-		Consumer = 2,			// Transformer supplying a consumer
-		Grounding = 3,			// Transformer used only for grounding of network neutral
-		Voltreg = 4,			// Feeder voltage regulator
-		Step = 5,				// Step
-		Generator = 6,			// Step-up transformer next to a generator.
-		Transmission = 7,		// HV/HV transformer within transmission network.
-		Interconnection = 8		// HV/HV transformer linking transmission network with other transmission networks.
-	}
-	
 	public enum WindingConnection : short
 	{
 		Y = 1,		// Wye
@@ -45,11 +33,16 @@ namespace FTN.Common
 		OD = 7		// 2-phase open delta. Not used in Network Model, only as result of Topology Analysis.
 	}
 
-	public enum WindingType : short
+	public enum RegulatingControlModeKind : short
 	{
-		None = 0,
-		Primary = 1,
-		Secondary = 2,
-		Tertiary = 3
-	}			
+        activePower = 1,    //Active power is specified.Add commentMore actions
+        admittance = 2,     //Admittance is specified.
+        currentFlow = 3,    //Current flow is specified.
+        @fixed = 4,         //The regulation mode is fixed, and thus not regulating.
+        powerFactor = 5,    //Power factor is specified.
+        reactivePower = 6,  //Reactive power is specified.
+        temperature = 7,    //Control switches on/off based on the local temperature (i.e., a thermostat).
+        timeScheduled = 8,  //Control switches on/off by time of day. The times may change on the weekend, or in different seasons.
+        voltage = 9,        //Voltage is specified.
+    }			
 }

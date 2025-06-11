@@ -11,35 +11,27 @@ using FTN.Services.NetworkModelService.DataModel.Core;
 
 namespace FTN.Services.NetworkModelService.DataModel.Wires
 {
-	public class PowerTransformer : Equipment
+	public class PowerTransformer : ConductingEquipment
 	{
-		private bool autotransformer = false;
+		private string vectorGroup = string.Empty;
 
-		private TransformerFunction function;
-
-		private List<long> transformerWindings = new List<long>();		
+		private List<long> powerTransformerEnds = new List<long>();		
 
 		public PowerTransformer(long globalId)
 			: base(globalId)
 		{
 		}
 
-		public bool Autotransformer
-		{
-			get { return autotransformer;}
-			set { autotransformer = value;}
+		public string VectorGroup
+        {
+			get { return vectorGroup; }
+			set { vectorGroup = value;}
 		}
 
-		public TransformerFunction Function
-		{
-			get { return function;}
-			set { function = value;}
-		}
-
-		public List<long> TransformerWindings
-		{
-			get { return transformerWindings;}
-			set { transformerWindings = value;}
+		public List<long> PowerTransformerEnds
+        {
+			get { return powerTransformerEnds; }
+			set { powerTransformerEnds = value;}
 		}
 			
 
@@ -48,8 +40,8 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 			if (base.Equals(obj))
 			{
 				PowerTransformer x = (PowerTransformer)obj;
-				return (x.function == this.function && x.autotransformer == this.autotransformer &&
-						CompareHelper.CompareLists(x.TransformerWindings, this.TransformerWindings, true));
+				return (x.vectorGroup == this.vectorGroup &&
+						CompareHelper.CompareLists(x.powerTransformerEnds, this.powerTransformerEnds, true));
 			}
 			else
 			{
@@ -68,9 +60,8 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 		{
 			switch (t)
 			{				
-				case ModelCode.POWERTR_AUTO:
-				case ModelCode.POWERTR_FUNC:
-				case ModelCode.POWERTR_WINDINGS:				
+				case ModelCode.POWERTR_VECGROUP:
+				case ModelCode.POWERTR_POWERTRENDS:				
 					return true;
 
 				default:
@@ -81,21 +72,16 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 		public override void GetProperty(Property prop)
 		{
 			switch (prop.Id)
-			{
-
-				case ModelCode.POWERTR_FUNC:
-					prop.SetValue((short)function);
-					break;				
-
-				case ModelCode.POWERTR_AUTO:
-					prop.SetValue(autotransformer);
+			{			
+				case ModelCode.POWERTR_VECGROUP:
+					prop.SetValue(vectorGroup);
 					break;
 
-				case ModelCode.POWERTR_WINDINGS:
-					prop.SetValue(transformerWindings);
-					break;
+                case ModelCode.POWERTR_POWERTRENDS:
+                    prop.SetValue(powerTransformerEnds);
+                    break;
 
-				default:
+                default:
 					base.GetProperty(prop);
 					break;
 			}
@@ -105,12 +91,8 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 		{
 			switch (property.Id)
 			{
-				case ModelCode.POWERTR_AUTO:
-					autotransformer = property.AsBool();
-					break;
-
-				case ModelCode.POWERTR_FUNC:					
-					function = (TransformerFunction)property.AsEnum();
+				case ModelCode.POWERTR_VECGROUP:
+                    vectorGroup = property.AsString();
 					break;
 			
 				default:
@@ -129,15 +111,15 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 		{
 			get
 			{
-				return (transformerWindings.Count > 0) || base.IsReferenced;
+				return (powerTransformerEnds.Count > 0) || base.IsReferenced;
 			}
 		}
 	
 		public override void GetReferences(Dictionary<ModelCode, List<long>> references, TypeOfReference refType)
 		{
-			if (transformerWindings != null && transformerWindings.Count > 0 && (refType == TypeOfReference.Target || refType == TypeOfReference.Both))
+			if (powerTransformerEnds != null && powerTransformerEnds.Count > 0 && (refType == TypeOfReference.Target || refType == TypeOfReference.Both))
 			{
-				references[ModelCode.POWERTR_WINDINGS] = transformerWindings.GetRange(0, transformerWindings.Count);
+				references[ModelCode.POWERTR_POWERTRENDS] = powerTransformerEnds.GetRange(0, powerTransformerEnds.Count);
 			}
 
 			base.GetReferences(references, refType);
@@ -147,8 +129,8 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 		{
 			switch (referenceId)
 			{
-				case ModelCode.POWERTRWINDING_POWERTRW:
-					transformerWindings.Add(globalId);
+				case ModelCode.POWERTREND_POWTRANSFORMER:
+                    powerTransformerEnds.Add(globalId);
 					break;
 
 				default:
@@ -161,11 +143,11 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 		{
 			switch (referenceId)
 			{
-				case ModelCode.POWERTRWINDING_POWERTRW:
+				case ModelCode.POWERTREND_POWTRANSFORMER:
 
-					if (transformerWindings.Contains(globalId))
+					if (powerTransformerEnds.Contains(globalId))
 					{
-						transformerWindings.Remove(globalId);
+                        powerTransformerEnds.Remove(globalId);
 					}
 					else
 					{
