@@ -72,9 +72,9 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="FTN50_ProfileCIMProfile_Labs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="PowerTransformerCIMProfile_Labs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Lib\FTN50_ProfileCIMProfile_Labs.dll</HintPath>
+      <HintPath>Lib\PowerTransformerCIMProfile_Labs.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -109,8 +109,9 @@
       <Name>NetworkModelGDAContract</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Content Include="Lib\FTN50_ProfileCIMProfile_Labs.dll" />
+    <Content Include="Lib\PowerTransformerCIMProfile_Labs.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

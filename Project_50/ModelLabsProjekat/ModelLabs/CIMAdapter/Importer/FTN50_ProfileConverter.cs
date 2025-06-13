@@ -27,6 +27,51 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
                 }
             }
         }
+        public static void PopulatePowerSystemResourceProperties(FTN.PowerSystemResource cimPowerSystemResource, ResourceDescription rd)
+        {
+            if ((cimPowerSystemResource != null) && (rd != null))
+            {
+                FTN50_ProfileConverter.PopulateIdentifiedObjectProperties(cimPowerSystemResource, rd);
+            }
+        }
+        public static void PopulateEquipmentProperties(FTN.Equipment cimEquipment, ResourceDescription rd)
+        {
+            if ((cimEquipment != null) && (rd != null))
+            {
+                FTN50_ProfileConverter.PopulatePowerSystemResourceProperties(cimEquipment, rd);
+
+                if (cimEquipment.AggregateHasValue)
+                {
+                    rd.AddProperty(new Property(ModelCode.EQUIPMENT_AGGREGATE, cimEquipment.Aggregate));
+                }
+                if (cimEquipment.NormallyInServiceHasValue)
+                {
+                    rd.AddProperty(new Property(ModelCode.EQUIPMENT_NORMALSERVICE, cimEquipment.NormallyInService));
+                }
+            }
+        }
+
+        public static void PopulateConductingEquipmentProperties(FTN.ConductingEquipment cimConductingEquipment, ResourceDescription rd)
+        {
+            if ((cimConductingEquipment != null) && (rd != null))
+            {
+                FTN50_ProfileConverter.PopulateEquipmentProperties(cimConductingEquipment, rd);
+            }
+        }
+        //PowerTransformer
+        public static void PopulatePowerTransformerProperties(FTN.PowerTransformer cimPowerTransformer, ResourceDescription rd)
+        {
+            if ((cimPowerTransformer != null) && (rd != null))
+            {
+                FTN50_ProfileConverter.PopulateConductingEquipmentProperties(cimPowerTransformer, rd);
+
+                if (cimPowerTransformer.VectorGroupHasValue)
+                {
+                    rd.AddProperty(new Property(ModelCode.POWERTR_VECGROUP, cimPowerTransformer.VectorGroup));
+                }
+            }
+        }
+        //
         //Terminal
         public static void PopulateTerminalProperties(FTN.Terminal cimTerminal, ResourceDescription rd, ImportHelper importHelper, TransformAndLoadReport report)
         {
@@ -55,70 +100,6 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
                         report.Report.Append("\" - Failed to set reference to ConductingEquipment: rdfID \"").Append(cimTerminal.ConductingEquipment.ID).AppendLine(" \" is not mapped to GID!");
                     }
                     rd.AddProperty(new Property(ModelCode.TERMINAL_CONDEQUIPMENT, gid));
-                }
-            }
-        }
-        //
-        public static void PopulatePowerSystemResourceProperties(FTN.PowerSystemResource cimPowerSystemResource, ResourceDescription rd)
-        {
-            if ((cimPowerSystemResource != null) && (rd != null))
-            {
-                FTN50_ProfileConverter.PopulateIdentifiedObjectProperties(cimPowerSystemResource, rd);
-            }
-        }
-
-        //TapChanger
-        public static void PopulateTapChangerProperties(FTN.TapChanger cimTapChanger, ResourceDescription rd, ImportHelper importHelper, TransformAndLoadReport report)
-        {
-            if ((cimTapChanger != null) && (rd != null))
-            {
-                FTN50_ProfileConverter.PopulatePowerSystemResourceProperties(cimTapChanger, rd);
-
-                if (cimTapChanger.HighStepHasValue)
-                {
-                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_HIGHSTEP, cimTapChanger.HighStep));
-                }
-                if (cimTapChanger.InitialDelayHasValue)
-                {
-                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_INITDELAY, cimTapChanger.InitialDelay));
-                }
-                if (cimTapChanger.LowStepHasValue)
-                {
-                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_LOWSTEP, cimTapChanger.LowStep));
-                }
-                if (cimTapChanger.LtcFlagHasValue)
-                {
-                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_LTCFLAG, cimTapChanger.LtcFlag));
-                }
-                if (cimTapChanger.NeutralStepHasValue)
-                {
-                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_NTRSTEP, cimTapChanger.NeutralStep));
-                }
-                if (cimTapChanger.NeutralUHasValue)
-                {
-                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_NTRU, cimTapChanger.NeutralU));
-                }
-                if (cimTapChanger.NormalStepHasValue)
-                {
-                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_NORSTEP, cimTapChanger.NormalStep));
-                }
-                if (cimTapChanger.RegulationStatusHasValue)
-                {
-                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_REGSTATUS, cimTapChanger.RegulationStatus));
-                }
-                if (cimTapChanger.SubsequentDelayHasValue)
-                {
-                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_SUBSDELAY, cimTapChanger.SubsequentDelay));
-                }
-                if (cimTapChanger.TapChangerControlHasValue)
-                {
-                    long gid = importHelper.GetMappedGID(cimTapChanger.TapChangerControl.ID);
-                    if (gid < 0)
-                    {
-                        report.Report.Append("WARNING: Convert ").Append(cimTapChanger.GetType().ToString()).Append(" rdfID = \"").Append(cimTapChanger.ID);
-                        report.Report.Append("\" - Failed to set reference to TapChangerControl: rdfID \"").Append(cimTapChanger.TapChangerControl.ID).AppendLine(" \" is not mapped to GID!");
-                    }
-                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_TCC, gid));
                 }
             }
         }
@@ -196,44 +177,63 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
         }
         //
 
-        public static void PopulateEquipmentProperties(FTN.Equipment cimEquipment, ResourceDescription rd)
+        //TapChanger
+        public static void PopulateTapChangerProperties(FTN.TapChanger cimTapChanger, ResourceDescription rd, ImportHelper importHelper, TransformAndLoadReport report)
         {
-            if ((cimEquipment != null) && (rd != null))
+            if ((cimTapChanger != null) && (rd != null))
             {
-                FTN50_ProfileConverter.PopulatePowerSystemResourceProperties(cimEquipment, rd);
+                FTN50_ProfileConverter.PopulatePowerSystemResourceProperties(cimTapChanger, rd);
 
-                if (cimEquipment.AggregateHasValue)
+                if (cimTapChanger.HighStepHasValue)
                 {
-                    rd.AddProperty(new Property(ModelCode.EQUIPMENT_AGGREGATE, cimEquipment.Aggregate));
+                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_HIGHSTEP, cimTapChanger.HighStep));
                 }
-                if (cimEquipment.NormallyInServiceHasValue)
+                if (cimTapChanger.InitialDelayHasValue)
                 {
-                    rd.AddProperty(new Property(ModelCode.EQUIPMENT_NORMALSERVICE, cimEquipment.NormallyInService));
+                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_INITDELAY, cimTapChanger.InitialDelay));
                 }
-            }
-        }
-
-        public static void PopulateConductingEquipmentProperties(FTN.ConductingEquipment cimConductingEquipment, ResourceDescription rd)
-        {
-            if ((cimConductingEquipment != null) && (rd != null))
-            {
-                FTN50_ProfileConverter.PopulateEquipmentProperties(cimConductingEquipment, rd);
-            }
-        }
-        //PowerTransformer
-        public static void PopulatePowerTransformerProperties(FTN.PowerTransformer cimPowerTransformer, ResourceDescription rd)
-        {
-            if ((cimPowerTransformer != null) && (rd != null))
-            {
-                FTN50_ProfileConverter.PopulateConductingEquipmentProperties(cimPowerTransformer, rd);
-
-                if (cimPowerTransformer.VectorGroupHasValue)
+                if (cimTapChanger.LowStepHasValue)
                 {
-                    rd.AddProperty(new Property(ModelCode.POWERTR_VECGROUP, cimPowerTransformer.VectorGroup));
+                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_LOWSTEP, cimTapChanger.LowStep));
+                }
+                if (cimTapChanger.LtcFlagHasValue)
+                {
+                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_LTCFLAG, cimTapChanger.LtcFlag));
+                }
+                if (cimTapChanger.NeutralStepHasValue)
+                {
+                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_NTRSTEP, cimTapChanger.NeutralStep));
+                }
+                if (cimTapChanger.NeutralUHasValue)
+                {
+                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_NTRU, cimTapChanger.NeutralU));
+                }
+                if (cimTapChanger.NormalStepHasValue)
+                {
+                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_NORSTEP, cimTapChanger.NormalStep));
+                }
+                if (cimTapChanger.RegulationStatusHasValue)
+                {
+                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_REGSTATUS, cimTapChanger.RegulationStatus));
+                }
+                if (cimTapChanger.SubsequentDelayHasValue)
+                {
+                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_SUBSDELAY, cimTapChanger.SubsequentDelay));
+                }
+                if (cimTapChanger.TapChangerControlHasValue)
+                {
+                    long gid = importHelper.GetMappedGID(cimTapChanger.TapChangerControl.ID);
+                    if (gid < 0)
+                    {
+                        report.Report.Append("WARNING: Convert ").Append(cimTapChanger.GetType().ToString()).Append(" rdfID = \"").Append(cimTapChanger.ID);
+                        report.Report.Append("\" - Failed to set reference to TapChangerControl: rdfID \"").Append(cimTapChanger.TapChangerControl.ID).AppendLine(" \" is not mapped to GID!");
+                    }
+                    rd.AddProperty(new Property(ModelCode.TAPCHANGER_TCC, gid));
                 }
             }
         }
         //
+        
         public static void PopulateTransformerEndProperties(FTN.TransformerEnd cimTransformerEnd, ResourceDescription rd, ImportHelper importHelper, TransformAndLoadReport report)
         {
             if ((cimTransformerEnd != null) && (rd != null))

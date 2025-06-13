@@ -125,7 +125,6 @@ namespace FTN.Services.NetworkModelService
 				case DMSType.TAPCHANGER:
 					io = new TapChanger(globalId);
 					break;
-
 				case DMSType.TERMINAL:
 					io = new Terminal(globalId);
 					break;

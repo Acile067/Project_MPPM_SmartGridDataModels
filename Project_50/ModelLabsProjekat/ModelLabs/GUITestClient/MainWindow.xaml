@@ -1,0 +1,139 @@
+﻿<Window x:Class="GUITestClient.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:GUITestClient.Views"
+        xmlns:viewModels="clr-namespace:GUITestClient.ViewModel"
+        xmlns:local="clr-namespace:GUITestClient"
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Background="#313338"
+        Title="GUI" Height="450" Width="800">
+    <Window.DataContext>
+        <viewModels:MainWindowViewModel/>
+    </Window.DataContext>
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type viewModels:GetValuesViewModel}">
+            <views:GetValuesView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:GetExtentValuesViewModel}">
+            <views:GetExtentValuesView/>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewModels:GetRelatedValuesViewModel}">
+            <views:GetRelatedValuesView/>
+        </DataTemplate>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DockPanel 
+                Grid.Row="0" 
+                Margin="18 10 0 0">
+            <Menu
+                    FontFamily="Trebuchet MS"
+                    DockPanel.Dock="Top" 
+                    HorizontalAlignment="Left"  
+                    Background="#313338">
+                <MenuItem 
+                        Cursor="Hand"
+                        ToolTip="Go to GetValues"
+                        Margin="0 0 0 0" 
+                        Height="50" 
+                        Command="{Binding NavCommand}" 
+                        CommandParameter="1_GetValues" 
+                        Padding="0">
+                    <MenuItem.Header>
+                        <Border 
+                                Background="#1E1F22"
+                                Height="50" 
+                                Width="220">
+                            <Border.Clip>
+                                <RectangleGeometry 
+                                        RadiusX="8" 
+                                        RadiusY="8"
+                                        Rect="0,0,220,50" />
+                            </Border.Clip>
+                            <TextBlock 
+                                    Foreground="#fff" 
+                                    FontSize="20" 
+                                    FontWeight="Bold" 
+                                    Text="GetValues" 
+                                    TextAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    HorizontalAlignment="Center" />
+                        </Border>
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem 
+                        Cursor="Hand"
+                        ToolTip="Go to GetExtentValues"
+                        Height="50"
+                        Margin="40 0 40 0"
+                        Command="{Binding NavCommand}" 
+                        CommandParameter="2_GetExtentValues" 
+                        Padding="0">
+                    <MenuItem.Header>
+                        <Border 
+                                Background="#1E1F22" 
+                                Height="50"
+                                Width="220">
+                            <Border.Clip>
+                                <RectangleGeometry 
+                                        RadiusX="8" 
+                                        RadiusY="8" 
+                                        Rect="0,0,220,50" />
+                            </Border.Clip>
+                            <TextBlock 
+                                    Foreground="#fff" 
+                                    FontSize="20" 
+                                    FontWeight="Bold" 
+                                    Text="GetExtentValues" 
+                                    TextAlignment="Center" 
+                                    VerticalAlignment="Center" 
+                                    HorizontalAlignment="Center" />
+                        </Border>
+                    </MenuItem.Header>
+                </MenuItem>
+                <MenuItem 
+                        Cursor="Hand"
+                        ToolTip="Go to GetRelatedValues"
+                        Height="50" 
+                        Command="{Binding NavCommand}" 
+                        CommandParameter="3_GetRelatedValues" 
+                        Padding="0">    
+                    <MenuItem.Header>
+                        <Border 
+                            Background="#1E1F22" 
+                            Height="50"
+                            Width="220">
+                            <Border.Clip>
+                                <RectangleGeometry 
+                                RadiusX="8" 
+                                RadiusY="8" 
+                                Rect="0,0,220,50" />
+                            </Border.Clip>
+                            <TextBlock 
+                                Foreground="#fff" 
+                                FontSize="20" 
+                                FontWeight="Bold" 
+                                Text="GetRelatedValues" 
+                                TextAlignment="Center" 
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Center" />
+                        </Border>
+                    </MenuItem.Header>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <Grid Grid.Row="1">
+            <ContentControl Content="{Binding CurrentViewModel}"/>
+        </Grid>
+    </Grid>
+</Window>

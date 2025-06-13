@@ -84,14 +84,60 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
             LogManager.Log("Loading elements and creating delta...", LogLevel.Info);
 
             //// import all concrete model types (DMSType enum)
+            ImportPowerTransformers();
             ImportTerminals();
             ImportTapChangerControls();
             ImportTapChangers();
-            ImportPowerTransformers();
             ImportPowerTransformerEnds();
 
 
             LogManager.Log("Loading elements and creating delta completed.", LogLevel.Info);
+        }
+        private void ImportPowerTransformers()
+        {
+            SortedDictionary<string, object> cimPowerTransformers = concreteModel.GetAllObjectsOfType("FTN.PowerTransformer");
+            if (cimPowerTransformers != null)
+            {
+                foreach (KeyValuePair<string, object> cimPowerTransformerPair in cimPowerTransformers)
+                {
+
+                    var obj = cimPowerTransformerPair.Value;
+                    Console.WriteLine("Runtime type: " + obj.GetType().FullName);
+                    Console.WriteLine("Runtime assembly: " + obj.GetType().Assembly.FullName);
+
+                    Console.WriteLine("Expected type: " + typeof(FTN.PowerTransformer).FullName);
+                    Console.WriteLine("Expected assembly: " + typeof(FTN.PowerTransformer).Assembly.FullName);
+
+                    FTN.PowerTransformer cimPowerTransformer = cimPowerTransformerPair.Value as FTN.PowerTransformer;
+
+                    ResourceDescription rd = CreatePowerTransformerDescription(cimPowerTransformer);
+                    if (rd != null)
+                    {
+                        delta.AddDeltaOperation(DeltaOpType.Insert, rd, true);
+                        report.Report.Append("PowerTransformer ID = ").Append(cimPowerTransformer.ID).Append(" SUCCESSFULLY converted to GID = ").AppendLine(rd.Id.ToString());
+                    }
+                    else
+                    {
+                        report.Report.Append("PowerTransformer ID = ").Append(cimPowerTransformer.ID).AppendLine(" FAILED to be converted");
+                    }
+                }
+                report.Report.AppendLine();
+            }
+        }
+
+        private ResourceDescription CreatePowerTransformerDescription(FTN.PowerTransformer cimPowerTransformer)
+        {
+            ResourceDescription rd = null;
+            if (cimPowerTransformer != null)
+            {
+                long gid = ModelCodeHelper.CreateGlobalId(0, (short)DMSType.POWERTR, importHelper.CheckOutIndexForDMSType(DMSType.POWERTR));
+                rd = new ResourceDescription(gid);
+                importHelper.DefineIDMapping(cimPowerTransformer.ID, gid);
+
+                ////populate ResourceDescription
+                FTN50_ProfileConverter.PopulatePowerTransformerProperties(cimPowerTransformer, rd);
+            }
+            return rd;
         }
 
         private void ImportTerminals()
@@ -145,11 +191,11 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
                     if (rd != null)
                     {
                         delta.AddDeltaOperation(DeltaOpType.Insert, rd, true);
-                        report.Report.Append("Terminal ID = ").Append(cimTapChangerControl.ID).Append(" SUCCESSFULLY converted to GID = ").AppendLine(rd.Id.ToString());
+                        report.Report.Append("TapChangerControl ID = ").Append(cimTapChangerControl.ID).Append(" SUCCESSFULLY converted to GID = ").AppendLine(rd.Id.ToString());
                     }
                     else
                     {
-                        report.Report.Append("Terminal ID = ").Append(cimTapChangerControl.ID).AppendLine(" FAILED to be converted");
+                        report.Report.Append("TapChangerControl ID = ").Append(cimTapChangerControl.ID).AppendLine(" FAILED to be converted");
                     }
                 }
                 report.Report.AppendLine();
@@ -183,11 +229,11 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
                     if (rd != null)
                     {
                         delta.AddDeltaOperation(DeltaOpType.Insert, rd, true);
-                        report.Report.Append("Terminal ID = ").Append(cimTapChanger.ID).Append(" SUCCESSFULLY converted to GID = ").AppendLine(rd.Id.ToString());
+                        report.Report.Append("TapChanger ID = ").Append(cimTapChanger.ID).Append(" SUCCESSFULLY converted to GID = ").AppendLine(rd.Id.ToString());
                     }
                     else
                     {
-                        report.Report.Append("Terminal ID = ").Append(cimTapChanger.ID).AppendLine(" FAILED to be converted");
+                        report.Report.Append("TapChanger ID = ").Append(cimTapChanger.ID).AppendLine(" FAILED to be converted");
                     }
                 }
                 report.Report.AppendLine();
@@ -209,45 +255,6 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
             return rd;
         }
 
-        private void ImportPowerTransformers()
-        {
-            SortedDictionary<string, object> cimPowerTransformers = concreteModel.GetAllObjectsOfType("FTN.PowerTransformer");
-            if (cimPowerTransformers != null)
-            {
-                foreach (KeyValuePair<string, object> cimPowerTransformerPair in cimPowerTransformers)
-                {
-                    FTN.PowerTransformer cimPowerTransformer = cimPowerTransformerPair.Value as FTN.PowerTransformer;
-
-                    ResourceDescription rd = CreateTapPowerTransformerDescription(cimPowerTransformer);
-                    if (rd != null)
-                    {
-                        delta.AddDeltaOperation(DeltaOpType.Insert, rd, true);
-                        report.Report.Append("Terminal ID = ").Append(cimPowerTransformer.ID).Append(" SUCCESSFULLY converted to GID = ").AppendLine(rd.Id.ToString());
-                    }
-                    else
-                    {
-                        report.Report.Append("Terminal ID = ").Append(cimPowerTransformer.ID).AppendLine(" FAILED to be converted");
-                    }
-                }
-                report.Report.AppendLine();
-            }
-        }
-
-        private ResourceDescription CreateTapPowerTransformerDescription(FTN.PowerTransformer cimPowerTransformer)
-        {
-            ResourceDescription rd = null;
-            if (cimPowerTransformer != null)
-            {
-                long gid = ModelCodeHelper.CreateGlobalId(0, (short)DMSType.POWERTR, importHelper.CheckOutIndexForDMSType(DMSType.POWERTR));
-                rd = new ResourceDescription(gid);
-                importHelper.DefineIDMapping(cimPowerTransformer.ID, gid);
-
-                ////populate ResourceDescription
-                FTN50_ProfileConverter.PopulatePowerTransformerProperties(cimPowerTransformer, rd);
-            }
-            return rd;
-        }
-
         private void ImportPowerTransformerEnds()
         {
             SortedDictionary<string, object> cimPowerTransformerEnds = concreteModel.GetAllObjectsOfType("FTN.PowerTransformerEnd");
@@ -261,11 +268,11 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
                     if (rd != null)
                     {
                         delta.AddDeltaOperation(DeltaOpType.Insert, rd, true);
-                        report.Report.Append("Terminal ID = ").Append(cimPowerTransformerEnd.ID).Append(" SUCCESSFULLY converted to GID = ").AppendLine(rd.Id.ToString());
+                        report.Report.Append("PowerTransformerEnd ID = ").Append(cimPowerTransformerEnd.ID).Append(" SUCCESSFULLY converted to GID = ").AppendLine(rd.Id.ToString());
                     }
                     else
                     {
-                        report.Report.Append("Terminal ID = ").Append(cimPowerTransformerEnd.ID).AppendLine(" FAILED to be converted");
+                        report.Report.Append("PowerTransformerEnd ID = ").Append(cimPowerTransformerEnd.ID).AppendLine(" FAILED to be converted");
                     }
                 }
                 report.Report.AppendLine();
