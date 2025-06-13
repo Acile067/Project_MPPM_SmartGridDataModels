@@ -13,16 +13,16 @@
 		<cim:IdentifiedObject.mRID>PT_111</cim:IdentifiedObject.mRID>
 		<cim:IdentifiedObject.name>PowerTransformer_1</cim:IdentifiedObject.name>
 	</cim:PowerTransformer>
-	<!--<cim:PowerTransformer rdf:ID="PT_222">
+	<cim:PowerTransformer rdf:ID="PT_222">
 		<cim:PowerTransformer.vectorGroup>vector2</cim:PowerTransformer.vectorGroup>
 		<cim:Equipment.aggregate>true</cim:Equipment.aggregate>
 		<cim:Equipment.normallyInService>true</cim:Equipment.normallyInService>
 		<cim:IdentifiedObject.aliasName>PWTrans_2</cim:IdentifiedObject.aliasName>
 		<cim:IdentifiedObject.mRID>PT_222</cim:IdentifiedObject.mRID>
 		<cim:IdentifiedObject.name>PowerTransformer_2</cim:IdentifiedObject.name>
-	</cim:PowerTransformer>-->
+	</cim:PowerTransformer>
 <!-- Terminal -->
-	<!--<cim:Terminal rdf:ID="T_111">
+	<cim:Terminal rdf:ID="T_111">
 		<cim:Terminal.ConductingEquipment rdf:resource="#PT_111"/> 
 		<cim:Terminal.connected>true</cim:Terminal.connected>
 		<cim:Terminal.phases>A</cim:Terminal.phases>
@@ -30,8 +30,8 @@
 		<cim:IdentifiedObject.aliasName>Ter_1</cim:IdentifiedObject.aliasName>
 		<cim:IdentifiedObject.mRID>T_111</cim:IdentifiedObject.mRID>
 		<cim:IdentifiedObject.name>Terminal_1</cim:IdentifiedObject.name>
-	</cim:Terminal>-->
-	<!--<cim:Terminal rdf:ID="T_222">
+	</cim:Terminal>
+	<cim:Terminal rdf:ID="T_222">
 		<cim:Terminal.ConductingEquipment rdf:resource="#PT_222"/> 
 		<cim:Terminal.connected>true</cim:Terminal.connected>
 		<cim:Terminal.phases>B</cim:Terminal.phases>
@@ -39,9 +39,9 @@
 		<cim:IdentifiedObject.aliasName>Ter_2</cim:IdentifiedObject.aliasName>
 		<cim:IdentifiedObject.mRID>T_222</cim:IdentifiedObject.mRID>
 		<cim:IdentifiedObject.name>Terminal_2</cim:IdentifiedObject.name>
-	</cim:Terminal>-->
+	</cim:Terminal>
 <!-- TapChangerControl -->
-	<!--<cim:TapChangerControl rdf:ID="TCC_111">
+	<cim:TapChangerControl rdf:ID="TCC_111">
 		<cim:TapChangerControl.limitVoltage>111.11</cim:TapChangerControl.limitVoltage>
 		<cim:TapChangerControl.lineDropCompensation>true</cim:TapChangerControl.lineDropCompensation>
 		<cim:TapChangerControl.lineDropR>1.1</cim:TapChangerControl.lineDropR>
@@ -57,8 +57,8 @@
 		<cim:IdentifiedObject.aliasName>TapCharCon_1</cim:IdentifiedObject.aliasName>
 		<cim:IdentifiedObject.mRID>TCC_111</cim:IdentifiedObject.mRID>
 		<cim:IdentifiedObject.name>TapChangerControl_1</cim:IdentifiedObject.name>
-	</cim:TapChangerControl>-->
-	<!--<cim:TapChangerControl rdf:ID="TCC_222">
+	</cim:TapChangerControl>
+	<cim:TapChangerControl rdf:ID="TCC_222">
 		<cim:TapChangerControl.limitVoltage>222.22</cim:TapChangerControl.limitVoltage>
 		<cim:TapChangerControl.lineDropCompensation>true</cim:TapChangerControl.lineDropCompensation>
 		<cim:TapChangerControl.lineDropR>2.2</cim:TapChangerControl.lineDropR>
@@ -74,9 +74,9 @@
 		<cim:IdentifiedObject.aliasName>TapCharCon_2</cim:IdentifiedObject.aliasName>
 		<cim:IdentifiedObject.mRID>TCC_222</cim:IdentifiedObject.mRID>
 		<cim:IdentifiedObject.name>TapChangerControl_2</cim:IdentifiedObject.name>
-	</cim:TapChangerControl>-->
+	</cim:TapChangerControl>
 <!-- TapChanger -->
-	<!--<cim:TapChanger rdf:ID="TC_111">
+	<cim:TapChanger rdf:ID="TC_111">
 		<cim:TapChanger.highStep>1</cim:TapChanger.highStep>
 		<cim:TapChanger.initialDelay>1.11</cim:TapChanger.initialDelay>
 		<cim:TapChanger.lowStep>1</cim:TapChanger.lowStep>
@@ -90,8 +90,8 @@
 		<cim:IdentifiedObject.aliasName>TapChar_1</cim:IdentifiedObject.aliasName>
 		<cim:IdentifiedObject.mRID>TC_111</cim:IdentifiedObject.mRID>
 		<cim:IdentifiedObject.name>TapChanger_1</cim:IdentifiedObject.name>
-	</cim:TapChanger>-->
-	<!--<cim:TapChanger rdf:ID="TC_222">
+	</cim:TapChanger>
+	<cim:TapChanger rdf:ID="TC_222">
 		<cim:TapChanger.highStep>2</cim:TapChanger.highStep>
 		<cim:TapChanger.initialDelay>2.22</cim:TapChanger.initialDelay>
 		<cim:TapChanger.lowStep>2</cim:TapChanger.lowStep>
@@ -105,9 +105,9 @@
 		<cim:IdentifiedObject.aliasName>TapChar_2</cim:IdentifiedObject.aliasName>
 		<cim:IdentifiedObject.mRID>TC_222</cim:IdentifiedObject.mRID>
 		<cim:IdentifiedObject.name>TapChanger_2</cim:IdentifiedObject.name>
-	</cim:TapChanger>-->
+	</cim:TapChanger>
 <!-- PowerTransformerEnd -->
-	<!--<cim:PowerTransformerEnd rdf:ID="PTE_111">
+	<cim:PowerTransformerEnd rdf:ID="PTE_111">
 		<cim:PowerTransformerEnd.b>1.1</cim:PowerTransformerEnd.b>
 		<cim:PowerTransformerEnd.b0>1.1</cim:PowerTransformerEnd.b0>
 		<cim:PowerTransformerEnd.connectionKind>A</cim:PowerTransformerEnd.connectionKind>
@@ -125,8 +125,8 @@
 		<cim:IdentifiedObject.aliasName>PWTransEnd_1</cim:IdentifiedObject.aliasName>
 		<cim:IdentifiedObject.mRID>PTE_111</cim:IdentifiedObject.mRID>
 		<cim:IdentifiedObject.name>PowerTransformerEnd_1</cim:IdentifiedObject.name>
-	</cim:PowerTransformerEnd>-->
-	<!--<cim:PowerTransformerEnd rdf:ID="PTE_222">
+	</cim:PowerTransformerEnd>
+	<cim:PowerTransformerEnd rdf:ID="PTE_222">
 		<cim:PowerTransformerEnd.b>2.2</cim:PowerTransformerEnd.b>
 		<cim:PowerTransformerEnd.b0>2.2</cim:PowerTransformerEnd.b0>
 		<cim:PowerTransformerEnd.connectionKind>D</cim:PowerTransformerEnd.connectionKind>
@@ -144,6 +144,6 @@
 		<cim:IdentifiedObject.aliasName>PWTransEnd_2</cim:IdentifiedObject.aliasName>
 		<cim:IdentifiedObject.mRID>PTE_222</cim:IdentifiedObject.mRID>
 		<cim:IdentifiedObject.name>PowerTransformerEnd_2</cim:IdentifiedObject.name>
-	</cim:PowerTransformerEnd>-->
+	</cim:PowerTransformerEnd>
 
 </rdf:RDF>

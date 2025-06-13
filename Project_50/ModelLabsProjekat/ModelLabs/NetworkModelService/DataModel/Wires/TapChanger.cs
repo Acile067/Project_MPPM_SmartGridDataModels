@@ -12,13 +12,13 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
 {
     public class TapChanger : PowerSystemResource
     {
-        private int highStep;
+        private long highStep;
         private float initialDelay;
-        private int lowStep;
+        private long lowStep;
         private bool ltcFlag;
-        private int neutralStep;
+        private long neutralStep;
         private float neutralU;
-        private int normalStep;
+        private long normalStep;
         private bool regulationStatus;
         private float subsequentDelay;
         private long tapChangerControl = 0;
@@ -26,7 +26,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
         public TapChanger(long globalId) : base(globalId)
         {
         }
-        public int HighStep
+        public long HighStep
         {
             get { return highStep; }
             set { highStep = value; }
@@ -36,7 +36,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
             get { return initialDelay; }
             set { initialDelay = value; }
         }
-        public int LowStep
+        public long LowStep
         {
             get { return lowStep; }
             set { lowStep = value; }
@@ -46,7 +46,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
             get { return ltcFlag; }
             set { ltcFlag = value; }
         }
-        public int NeutralStep
+        public long NeutralStep
         {
             get { return neutralStep; }
             set { neutralStep = value; }
@@ -56,7 +56,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
             get { return neutralU; }
             set { neutralU = value; }
         }
-        public int NormalStep
+        public long NormalStep
         {
             get { return normalStep; }
             set { normalStep = value; }
@@ -167,25 +167,25 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
             switch (property.Id)
             {
                 case ModelCode.TAPCHANGER_HIGHSTEP:
-                    highStep = property.AsInt();
+                    highStep = property.AsLong();
                     break;
                 case ModelCode.TAPCHANGER_INITDELAY:
                     initialDelay = property.AsFloat();
                     break;
                 case ModelCode.TAPCHANGER_LOWSTEP:
-                    lowStep = property.AsInt();
+                    lowStep = property.AsLong();
                     break;
                 case ModelCode.TAPCHANGER_LTCFLAG:
                     ltcFlag = property.AsBool();
                     break;
                 case ModelCode.TAPCHANGER_NTRSTEP:
-                    neutralStep = property.AsInt();
+                    neutralStep = property.AsLong();
                     break;
                 case ModelCode.TAPCHANGER_NTRU:
                     neutralU = property.AsFloat();
                     break;
                 case ModelCode.TAPCHANGER_NORSTEP:
-                    normalStep = property.AsInt();
+                    normalStep = property.AsLong();
                     break;
                 case ModelCode.TAPCHANGER_REGSTATUS:
                     regulationStatus = property.AsBool();

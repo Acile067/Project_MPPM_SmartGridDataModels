@@ -14,7 +14,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
     {
         private bool connected;
         private PhaseCode phases;
-        private int sequenceNumber;
+        private long sequenceNumber;
         private long conductingEquipment = 0;
         private List<long> regulatingControls = new List<long>();
         private List<long> transformerEnds = new List<long>();
@@ -31,7 +31,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
             get { return phases; }
             set { phases = value; }
         }
-        public int SequenceNumber
+        public long SequenceNumber
         {
             get { return sequenceNumber; }
             set { sequenceNumber = value; }
@@ -129,7 +129,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Core
                     phases = (PhaseCode)property.AsEnum();
                     break;
                 case ModelCode.TERMINAL_SEQNUM:
-                    sequenceNumber = property.AsInt();
+                    sequenceNumber = property.AsLong();
                     break;
                 case ModelCode.TERMINAL_CONDEQUIPMENT:
                     conductingEquipment = property.AsReference();

@@ -18,7 +18,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
         private WindingConnection connectionKind;
         private float g;
         private float g0;
-        private int phaseAngleClock;
+        private long phaseAngleClock;
         private float r;
         private float r0;
         private float ratedS;
@@ -56,7 +56,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
             get { return g0; }
             set { g0 = value; }
         }
-        public int PhaseAngleClock
+        public long PhaseAngleClock
         {
             get { return phaseAngleClock; }
             set { phaseAngleClock = value; }
@@ -215,7 +215,7 @@ namespace FTN.Services.NetworkModelService.DataModel.Wires
                     g0 = prop.AsFloat();
                     break;
                 case ModelCode.POWERTREND_PHANCLOCK:
-                    phaseAngleClock = prop.AsInt();
+                    phaseAngleClock = prop.AsLong();
                     break;
                 case ModelCode.POWERTREND_R:
                     r = prop.AsFloat();
