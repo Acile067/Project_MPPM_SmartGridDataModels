@@ -9,7 +9,7 @@
         <Style x:Key="NavButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="18"/>
             <Setter Property="FontWeight" Value="Bold"/>
-            <Setter Property="FontFamily" Value="Cambria"/>
+            <Setter Property="FontFamily" Value="Trebuchet MS"/>
             <Setter Property="Margin" Value="20,10,0,10"/>
             <Setter Property="Foreground" Value="White"/>
             <Setter Property="Background" Value="Transparent"/>

@@ -4,33 +4,38 @@ namespace FTN.Common
 {	
 	public enum PhaseCode : short
 	{
-		Unknown = 0x0,
-		N = 0x1,
-		C = 0x2,
-		CN = 0x3,
-		B = 0x4,
-		BN = 0x5,
-		BC = 0x6,
-		BCN = 0x7,
-		A = 0x8,
-		AN = 0x9,
-		AC = 0xA,
-		ACN = 0xB,
-		AB = 0xC,
-		ABN = 0xD,
-		ABC = 0xE,
-		ABCN = 0xF
-	}
+		A = 0x0,
+		AB = 0x1,
+		ABC = 0x2,
+		ABCN = 0x3,
+		ABN = 0x4,
+		AC = 0x5,
+		ACN = 0x6,
+		AN = 0x7,
+		B = 0x8,
+		BC = 0x9,
+		BCN = 0xA,
+		BN = 0xB,
+		C = 0xC,
+		CN = 0xD,
+		N = 0xE,
+		s1 = 0xF,
+		s12 = 0x10,
+		s12N = 0x11,
+		s1N = 0x12,
+		s2 = 0x13,
+		s2N = 0x14
+    }
 	
 	public enum WindingConnection : short
 	{
-		Y = 1,		// Wye
-		D = 2,		// Delta
-		Z = 3,		// ZigZag
-		I = 4,		// Single-phase connection. Phase-to-phase or phase-to-ground is determined by elements' phase attribute.
-		Scott = 5,   // Scott T-connection. The primary winding is 2-phase, split in 8.66:1 ratio
-		OY = 6,		// 2-phase open wye. Not used in Network Model, only as result of Topology Analysis.
-		OD = 7		// 2-phase open delta. Not used in Network Model, only as result of Topology Analysis.
+		A = 0,      
+        D = 1,		
+		I = 2,		
+		Y = 3,		
+		Yn = 4,		
+		Z = 5,   
+		Zn = 6,		
 	}
 
 	public enum RegulatingControlModeKind : short

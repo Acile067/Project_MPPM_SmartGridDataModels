@@ -80,7 +80,7 @@ namespace GUITestClient
                 {
                     Content = prop.ToString(),
                     FontSize = 14,
-                    FontFamily = new FontFamily("Cambria"),
+                    FontFamily = new FontFamily("Trebuchet MS"),
                     Margin = new Thickness(0, 2, 0, 2),
                     Visibility = Visibility.Visible
                 };

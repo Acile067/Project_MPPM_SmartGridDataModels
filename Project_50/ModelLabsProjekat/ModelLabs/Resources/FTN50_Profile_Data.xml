@@ -25,7 +25,7 @@
 	<cim:Terminal rdf:ID="T_111">
 		<cim:Terminal.ConductingEquipment rdf:resource="#PT_111"/> 
 		<cim:Terminal.connected>true</cim:Terminal.connected>
-		<cim:Terminal.phases>A</cim:Terminal.phases>
+		<cim:Terminal.phases>AB</cim:Terminal.phases>
 		<cim:Terminal.sequenceNumber>111</cim:Terminal.sequenceNumber>
 		<cim:IdentifiedObject.aliasName>Ter_1</cim:IdentifiedObject.aliasName>
 		<cim:IdentifiedObject.mRID>T_111</cim:IdentifiedObject.mRID>

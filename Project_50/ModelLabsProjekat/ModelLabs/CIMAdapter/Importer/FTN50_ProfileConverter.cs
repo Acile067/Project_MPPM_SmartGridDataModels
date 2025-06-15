@@ -354,27 +354,38 @@ namespace FTN.ESI.SIMES.CIM.CIMAdapter.Importer
                     return PhaseCode.CN;
                 case FTN.PhaseCode.N:
                     return PhaseCode.N;
+                case FTN.PhaseCode.s1:
+                    return PhaseCode.s1;
+                case FTN.PhaseCode.s12:
+                    return PhaseCode.s12;
                 case FTN.PhaseCode.s12N:
-                    return PhaseCode.ABN;
+                    return PhaseCode.s12N;
                 case FTN.PhaseCode.s1N:
-                    return PhaseCode.AN;
+                    return PhaseCode.s12N;
                 case FTN.PhaseCode.s2N:
-                    return PhaseCode.BN;
-                default: return PhaseCode.A;//Default should never happen, but just in case. I dont know why Unknown is not comming 
+                    return PhaseCode.s2N;
+                default: return PhaseCode.A; 
             }
         }
         public static WindingConnection GetDMSWindingConnection(FTN.WindingConnection windingConnection)
         {
             switch (windingConnection)
             {
+                case FTN.WindingConnection.A:
+                    return WindingConnection.A;
                 case FTN.WindingConnection.D:
                     return WindingConnection.D;
                 case FTN.WindingConnection.I:
                     return WindingConnection.I;
-                case FTN.WindingConnection.Z:
-                    return WindingConnection.Z;
                 case FTN.WindingConnection.Y:
                     return WindingConnection.Y;
+                case FTN.WindingConnection.Yn:
+                    return WindingConnection.Yn;
+                case FTN.WindingConnection.Z:
+                    return WindingConnection.Z;
+                case FTN.WindingConnection.Zn:
+                    return WindingConnection.Zn;
+
                 default:
                     return WindingConnection.Y;
             }
